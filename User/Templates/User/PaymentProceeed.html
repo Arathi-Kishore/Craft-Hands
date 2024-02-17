@@ -1,0 +1,179 @@
+{% extends 'User/header.html'%}
+{% load static %}
+{% block content %}
+<style>
+    
+body{
+  background-color: #2E294E;
+  padding-top: 3rem;
+}
+
+/*Lock area*/
+.payment-box{
+  /*Border settings*/
+  border: 0.35rem solid;
+  border-color: #1B998B;
+  border-radius: 2.5rem;
+  box-shadow: 0.25rem 0.25rem 1rem 0.5rem #1D1A30;
+  
+  
+  /*Size settings*/
+  min-height: 20rem;
+  max-width: 20rem;
+  
+  /*Content align*/
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  vertical-align:middle;
+}
+
+.payment-title{  
+  font-weight:bold;
+  font-size: 2rem;
+  color: #C5D86D;
+}
+
+.lock-handle-outer{
+  /*Border settings*/
+  border: 0.35rem solid;
+  border-bottom: none;
+  border-color: #1B998B;
+  border-radius: 1rem;
+  border-top-left-radius: 10rem;
+  border-top-right-radius: 10rem;
+  box-shadow: inset 0.2rem 0.2rem 1rem 0.2rem #1D1A30;
+  
+  /*Size settings*/
+  min-height: 10rem;
+  max-width: 15rem;
+  
+  /*Content align*/
+  justify-content: center;
+  margin: auto;
+  vertical-align:middle;
+}
+
+.lock-handle-inner{
+  /*Border settings*/
+  border: 0.35rem solid;
+  border-bottom: none;
+  border-color: #1B998B;
+  border-radius: 1rem;
+  border-top-left-radius: 10rem;
+  border-top-right-radius: 10rem;
+  box-shadow: inset 0.2rem 0.2rem 1rem 0.2rem #1D1A30;
+  
+  /*Size settings*/
+  min-height: 10rem;
+  max-width: 8rem;
+  
+  /*Content align*/
+  justify-content: bottom;
+  margin: auto;
+  vertical-align:bottom;
+}
+
+/*Buttons*/
+.donate-btn{  
+  /*Size settings*/
+  min-width:15rem;
+  min-height:3rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: #1B998B;
+  box-shadow: 0.1rem 0.1rem 1rem 0.1rem #1D1A30;
+  
+  /*Text settings*/
+  font-weight:bold;
+  font-size: 1rem;
+  color: #C5D86D;
+  cursor:pointer;
+  
+}
+
+.donate-btn:hover{
+  background-color: #C5D86D;
+  color:#F46036;
+  transition: 0.1s;
+  box-shadow: 0.1rem 0.1rem 1rem 0.5rem #1D1A30;
+}
+.donate-btn:active{
+  background-color: #1D1A30;
+  color:#F46036;
+  transition: 0.1s;
+  box-shadow: 0.1rem 0.1rem 1rem 0.1rem #1D1A30;
+}
+
+/*Key hole items*/
+
+.key-hole{
+  /*Circle*/
+  border: 0.35rem solid;;
+  border-color: #1B998B;
+  border-bottom: 0rem;
+  width: 3rem;
+  min-height:3rem;
+  border-radius: 2rem;
+  box-shadow: inset 0.3rem 0.3rem 1rem 1rem #1D1A30;
+  
+  
+  /*Content align*/
+  margin: auto;
+  vertical-align:middle;
+}
+
+.key-box{
+  /*Triangle*/
+  border: 0.35rem solid;;
+  border-color: #1B998B;
+  border-top: 0rem;
+  width: 2rem;
+  min-height:3rem;
+  border-radius: 1rem;
+  box-shadow: inset 0.3rem 0.3rem 1rem 0.5rem #1D1A30;
+  
+  
+  /*Content align*/
+  margin: auto;
+  vertical-align:middle;
+}
+
+
+.keyarea{
+  padding: 1rem;
+}
+
+</style>
+<body>
+  <form action="" method="post">
+    {% csrf_token %}
+    <div class="lock-handle-outer">
+      <div style="padding-top: 3rem;">
+        <div class="lock-handle-inner"></div>
+          
+        </div>
+      </div>
+    
+    
+    <div class="payment-box">
+      <h2 class="payment-title">Pay Rs.100</h2>
+      
+      <input class="donate-btn" type="submit" value="PayNow">
+     
+      
+      <div class="keyarea">
+        <div class="key-hole"></div>  
+        <div class="key-box"></div>       
+      </div>
+    </form>
+    <div/>
+      
+      
+      
+  </body>
+{% endblock content %}
+    
+    
+    
+    

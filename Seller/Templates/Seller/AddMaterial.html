@@ -1,0 +1,69 @@
+{% extends 'Seller/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table border="2" align="center" cellpadding="10">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id=""></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td><input type="text" name="txt_des" id=""></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="txt_pic" id=""></td>
+            </tr>
+            <tr>
+                <td>Rate</td>
+                <td><input type="text" name="txt_rate" id=""></td>
+            </tr>
+            <tr>
+                <td>Stock</td>
+                <td><input type="number" name="txt_stock" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="" id="" value="Save">
+                    <input type="reset" name=""  id="" value="Cancel"></td>  
+            </tr>
+        </table>
+    </form>
+    <table align="center" cellpadding="50" style="border-collapse: collapse" id="result">
+        <tr>
+            {% for i in mdata %}
+
+            <td>
+                <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+
+                    <p><img src="{{i.image.url}}" width="100px" height="100px" /></p>
+                    <br>
+                    <p>{{i.name}}</p>
+                    <br>
+                    <p>{{i.details}}</p>
+                    <br>
+                    <p>{{i.rate}}</p>
+                    <br>
+                    <p><a href="{% url 'User:addtocartmaterial' i.id%}">Add to Cart Material</a></p>
+                </div>
+            </td>
+            {% if forloop.counter|divisibleby:4 %}
+        </tr>
+        <tr>
+            {% endif %}
+
+
+            {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

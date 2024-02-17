@@ -1,0 +1,95 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body align="center">
+    <center><h1>Buy Now</h1></center>
+    <div id="tab">
+    <form action="" method="post">
+        {% csrf_token %}
+        {% if data %}
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Name</th>
+                <td>{{data.name}}</td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td><i class="fas fa-rupee-sign"></i>{{data.rate}} <input type="hidden" name="txtrate" id="txtrate" value="{{data.rate}}"></td>
+            </tr>
+            <tr>
+                <th>Detail</th>
+                <td>{{data.details}}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{data.image.url}}" width="150" height="150" style="border-radius: 15px;"></td>
+
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td><input type="text" name="qty" id="qty" onchange="getTotal()"></td>
+            </tr>
+            <tr>
+                <td>Total Price</td>
+                <td><input type="text" name="price" id="price"></td>
+            </tr>
+            <tr >
+                <td align="center" colspan="2">
+                    <input type="submit" value="Confirm" name="btnconfirm">
+                </td>
+            </tr>
+        </table>
+        {% elif mdata %}
+        <table border="1" align="center" cellpadding="10">
+            <tr>
+                <th>Name</th>
+                <td>{{mdata.name}}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{mdata.image.url}}" width="150" height="150" style="border-radius: 15px;"></td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td><i class="fas fa-rupee-sign"></i>{{mdata.rate}} <input type="hidden" name="txtrate" id="txtrate" value="{{mdata.rate}}"></td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td><input type="number" name="qty" id="qty" min="1" max="{{mdata.stock}}" onchange="getTotal()"></td>
+            </tr>
+            <tr>
+                <th>Total Price</th>
+                <td><input type="text" name="price" id="price" ></td>
+            </tr>
+            <tr >
+                <td align="center" colspan="2">
+                    <input type="submit" value="Confirm" name="btnconfirm" >
+                </td>
+            </tr>
+            
+        </table>
+        {% else %}
+        <p>Empty</p>
+        {% endif %}
+    </form>
+    </div>
+</body>
+</html>
+<script>
+    function getTotal()
+    {
+        var rate=document.getElementById('txtrate').value;
+        var qty=document.getElementById('qty').value;
+        var tot=rate*qty;
+        document.getElementById("price").value=tot;
+    }
+</script>
+{% endblock content %}

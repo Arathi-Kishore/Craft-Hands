@@ -1,0 +1,44 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>View Material</h1></center>
+    <form action="" method="post" enctype="multipart/form-data">
+        {%csrf_token %}
+        <table align="center" cellpadding="50" style="border-collapse: collapse" id="result">
+            <tr>
+                {% for i in wdata %}
+    
+                <td>
+                    <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
+    
+                        <p><img src="{{i.image.url}}" width="100px" height="100px" /></p>
+                        <br>
+                        <p>{{i.name}}</p>
+                        <br>
+                        <p>{{i.code}}</p>
+                        <br>
+                        <p>{{i.rate}}</p>
+                        <br>
+                        <p><a href="{% url 'User:addtocartmaterial' i.id%}">Add to Cart</a></p>
+                    </div>
+                </td>
+                {% if forloop.counter|divisibleby:4 %}
+            </tr>
+            <tr>
+                {% endif %}
+    
+    
+                {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

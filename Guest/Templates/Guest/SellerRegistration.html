@@ -1,0 +1,94 @@
+{% extends 'Guest/header.html'%}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>Seller Registration</h1></center>
+    <form method="post" action="" id="SellerForm" data-places-url="{%url 'Admin:ajaxplace' %}" enctype="multipart/form-data">
+        {%csrf_token %}
+        <table border="2" align="center" cellpadding="10">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id=""></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_con" id=""></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="txt_email" id=""></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="textarea" name="txt_add" id=""> </td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="select_dis" id="sel_district">
+                    <option>--select--</option>
+                    {% for i in disdata %}
+                    <option value="{{ i.id }}">{{ i.district_name }}</option>
+                    {% endfor %}
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="select_place" id="sel_place">
+                <option>--select--</option>    
+                </select></td>   
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                   <input type="radio" name="btn_gen" id="" value="male">male
+                   <input type="radio" name="btn_gen" id="" value="female">female</td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="txt_pic" id=""></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txt_pass" id=""></td>
+            </tr>
+            <tr>
+                <td>Confirm Password</td>
+                <td><input type="password" name="txt_conform" id=""></td>
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td><input type="file" name="txt_proof" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="" id="" value="Submit">
+                <input type="reset" name=""  id="" value="Cancel"></td>  
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_district").change(function () {
+            var did = $(this).val();
+            var ur = $("#SellerForm").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { Dist: did, },
+                success: function (data) {
+                    $("#sel_place").html(data);
+                },
+            });
+        });
+</script>
+{% endblock content %}

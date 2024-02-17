@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" id="locform" data-place-url="{% url 'Admin:ajaxplace'%}">
+        {%csrf_token %}
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <td>District</td>
+                <td><select name="select_dis" id="select_dis">
+                    <option>--select--</option>
+                    {% for i in disdata %}
+                    <option value="{{ i.id}}">{{ i.district_name }}</option> 
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="select_place" id="select_place">
+                    <option value="">--select--</option>
+                 
+                </select></td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td><input type="text" name="txt_location" id=""></td>
+                </tr>
+                <tr>
+                <td>Latitude</td>
+                <td><input type="text" name="txt_lati" id="" value="">
+                </td>
+               </tr>
+                <tr>
+                <td>Longitude</td>
+                <td><input type="text" name="txt_longi" id="" value="">
+                </td>
+                </tr>
+        
+            <tr>
+                <td colspan="2 " align="center"><input type="submit" name="btn_save" id="">
+                <input type="reset" name="btn_cancel" id=""></td>
+            </tr>
+        </table>
+    </form>
+    <table border="1" align="center">
+        <tr>
+            <td>Sl.no</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Location</td>
+            <td>Latitude</td>
+            <td>Longitude</td>
+            <td>Action</td>
+        </tr>
+        <tr>
+            {% for i in loc %}
+<td>{{forloop.counter}}</td>
+<td>{{i.place.district.district_name}}</td>
+<td>{{i.place.place_name}}</td>
+<td>{{i.name}}</td>
+<td>{{i.latitude}}</td>
+<td>{{i.longitude}}</td>
+<td><a href="{% url 'Admin:del_location' i.id %}">Delete</a>
+</td>
+        </tr>
+            {% endfor %}
+    </table>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#select_dis").change(function () {
+            var did = $(this).val();
+            var ur = $("#locform").attr("data-place-url");
+            $.ajax({
+                url: ur,
+                data: { Dist: did, },
+                success: function (data) {
+                    $("#select_place").html(data);
+                },
+            });
+        });
+</script>

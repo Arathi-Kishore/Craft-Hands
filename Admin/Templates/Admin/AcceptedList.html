@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>Accepted List</h1></center>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        {%csrf_token %}
+            <table align="center" border="1" cellpadding="10">
+                <tr>
+                    <td>Sl.no</td>
+                    <td>Name</td>
+                    <td>Contact</td>
+                    <td>Email</td>
+                    <td>Address</td>
+                </tr>
+                {% for i in selldata %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.contact}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.address}}</td>
+                    <td>Action</td>
+                    <td>
+                        <a href="{% url 'Admin:rejectlist' i.id %}">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+    </form>
+</body>
+</html>
