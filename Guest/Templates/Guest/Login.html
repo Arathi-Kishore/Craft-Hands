@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+{% extends 'Guest/header.html'%}
+{% load static %}
+{% block content %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,3 +33,5 @@
     alert("{{msg}}");
 </script>
 {% endif %}
+
+{% endblock content %}

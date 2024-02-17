@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from Guest.models import *
 from Admin.models import *
 from Seller.models import *
+from User.models import *
 # Create your views here.
 
 def sellerhome(request):
@@ -82,5 +83,10 @@ def wgall(request,wid):
 def DeleteWork(request,did):
     tbl_work.objects.get(id=did).delete()
     return redirect("Seller:AddWork") 
+
+def userbooking(request):
+    userdata=tbl_seller.objects.get(id=request.session['sid'])
+    data=tbl_wcart.objects.filter(works__seller=userdata)
+    return render(request,"Seller/UserBooking.html",{'data':data})
 
 

@@ -1,1 +1,12 @@
-Welcome {{udata.user_name}}
+{% extends 'User/header.html'%}
+{% load static %}
+{% block content %}
+<html>
+    <center><h3>Welcome {{udata.name}}</h3></center>
+    <br><br>
+    <a href="{% url 'User:MyProfile'%}">MyProfile</a><br>
+    <a href="{% url 'User:EditProfile'%}">EditProfile</a><br>
+    <a href="{% url 'User:ChangePassword'%}">ChangePassword</a><br>
+    <a href="{% url 'User:SearchSeller'%}">SearchSeller</a>
+</html>
+{% endblock content %}

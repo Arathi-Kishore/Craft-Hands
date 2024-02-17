@@ -13,5 +13,6 @@ urlpatterns = [
     path('del_materialdata/<int:did>',views.DeleteMaterial,name="deletematerial"),
     path('WorkGallery/<int:wid>',views.wgall,name="WorkGallery"),
     path('del_workdata/<int:did>',views.DeleteWork,name="deletework"),
+    path('Userbooking/',views.userbooking,name="Userbooking"),
     
 ]   

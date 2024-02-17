@@ -1,1 +1,12 @@
-Welcome {{sdata.seller_name}}
+{% extends 'Seller/header.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <center><h3>Welcome {{sdata.name}}</h3></center>
+    <br><br>
+    <a href="{% url 'Seller:MyProfile'%}">MyProfile</a><br>
+    <a href="{% url 'Seller:EditProfile'%}">EditProfile</a><br>
+    <a href="{% url 'Seller:ChangePassword'%}">ChangePassword</a><br>
+    <a href="{% url 'Seller:AddWork'%}">AddWork</a><br>
+</html>
+{% endblock content %}
