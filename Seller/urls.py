@@ -14,5 +14,10 @@ urlpatterns = [
     path('WorkGallery/<int:wid>',views.wgall,name="WorkGallery"),
     path('del_workdata/<int:did>',views.DeleteWork,name="deletework"),
     path('Userbooking/',views.userbooking,name="Userbooking"),
+    path('acceptedlist/',views.acceptlist,name="AcceptedList"),
+    path('rejectedlist/',views.rejectlist,name="RejectedList"),
+    path('acceptlist/<int:aid>',views.accept,name="acceptlist"),
+    path('rejectlist/<int:rid>',views.reject,name="rejectlist"),
+
     
 ]   

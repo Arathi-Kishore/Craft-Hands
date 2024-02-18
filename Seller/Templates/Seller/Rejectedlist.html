@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center><h1>User Booking</h1></center>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        {%csrf_token %}
+            <table align="center" border="1" cellpadding="10">
+                <tr>
+                    <td>Sl.no</td>
+                    <td>Work</td>
+                    <td>Image</td>
+                    <td>Rate</td>
+                    <td>Quantity</td>
+                    <td>Name of order</td>
+                    <td>Address</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in selldata %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.works.name}}</td>
+                    <td>{{i.works.image}}</td>
+                    <td>{{i.works.rate}}</td>
+                    <td>{{i.qty}}</td>
+                    <td>{{i.wbooking.user.name}}</td>
+                    <td>{{i.wbooking.user.address}}</td>
+                    <td>
+                        <a href="{% url 'Seller:acceptlist' i.wbooking.id %}">Accept</a><br>
+                        <a href="{% url 'Seller:rejectlist' i.wbooking.id %}">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+    </form>
+</body>
+</html>
+

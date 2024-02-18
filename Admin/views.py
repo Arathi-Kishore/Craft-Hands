@@ -6,8 +6,12 @@ from Guest.models import *
 def dis(request):
     disdata=tbl_district.objects.all()
     if request.method=="POST":
-        tbl_district.objects.create(district_name=request.POST.get("txt_district"))
-        return render(request,"Admin/District.html",{'district':disdata})
+        datacount= tbl_district.objects.filter(district_name=request.POST.get("txt_district")).count()
+        if datacount>0:
+            return render(request,"Admin/District.html",{'district':disdata}) 
+        else:      
+            tbl_district.objects.create(district_name=request.POST.get("txt_district"))
+            return render(request,"Admin/District.html",{'district':disdata})
     else:
         return render(request,"Admin/District.html",{'district':disdata})
 
@@ -30,9 +34,13 @@ def pla(request):
     subdata=tbl_place.objects.all()
     if request.method=="POST":
         dis = tbl_district.objects.get(id=request.POST.get("select_dis"))
-        tbl_place.objects.create(
-            place_name=request.POST.get("txt_place"),
-            district=dis,longitude=request.POST.get('txt_longi'),latitude=request.POST.get('txt_lati')
+        datacount=tbl_place.objects.filter( place_name=request.POST.get("txt_place"), district=dis).count()
+        if datacount>0:
+            return render(request,"Admin/Place.html",{'disdata':disdata,'subcat':subdata})
+        else:
+                tbl_place.objects.create(
+                place_name=request.POST.get("txt_place"),
+                district=dis,longitude=request.POST.get('txt_longi'),latitude=request.POST.get('txt_lati')
         )
         return render(request,"Admin/Place.html",{'disdata':disdata,'subcat':subdata})
     else:    
@@ -52,7 +60,12 @@ def loc(request):
     subdata=tbl_location.objects.all()
     if request.method=="POST":
         dis = tbl_place.objects.get(id=request.POST.get("select_place"))
-        tbl_location.objects.create(
+        datacount= tbl_location.objects.filter(name=request.POST.get("txt_location"),
+        place=dis).count()
+        if datacount>0:
+                return render(request,"Admin/Location.html",{'disdata':disdata,'loc':subdata})
+        else:
+                tbl_location.objects.create(
             name=request.POST.get("txt_location"),
             place=dis,
             latitude=request.POST.get("txt_lati"),
@@ -69,7 +82,11 @@ def Deletelocation(request,did):
 def WorkType(request):
     disdata=tbl_worktype.objects.all()
     if request.method=="POST":
-        tbl_worktype.objects.create(worktype=request.POST.get("txt_work"))
+        datacount= tbl_worktype.objects.filter(worktype=request.POST.get("txt_work")).count()
+        if datacount>0:
+            return render(request,"Admin/WorkType.html",{"WorkType":disdata})
+        else:
+            tbl_worktype.objects.create(worktype=request.POST.get("txt_work"))
         return render(request,"Admin/WorkType.html",{"WorkType":disdata})
     else:
         return render(request,"Admin/WorkType.html",{'WorkType':disdata})

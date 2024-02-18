@@ -86,7 +86,31 @@ def DeleteWork(request,did):
 
 def userbooking(request):
     userdata=tbl_seller.objects.get(id=request.session['sid'])
-    data=tbl_wcart.objects.filter(works__seller=userdata)
+    data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=0)
     return render(request,"Seller/UserBooking.html",{'data':data})
+
+def acceptlist(request):
+    userdata=tbl_seller.objects.get(id=request.session['sid'])
+    data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=1)
+    return render(request,"Seller/AcceptedList.html",{'selldata':data})
+
+def rejectlist(request):
+    userdata=tbl_seller.objects.get(id=request.session['sid'])
+    data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=2)
+    return render(request,"Seller/RejectedList.html",{'selldata':data})
+
+def accept(request,aid):
+    sellerdata=tbl_wbooking.objects.get(id=aid)
+    sellerdata.status=1
+    sellerdata.save()
+    return redirect("Seller:Userbooking")
+
+def reject(request,rid):
+    sellerdata=tbl_wbooking.objects.get(id=rid)
+    sellerdata.status=2
+    sellerdata.save()
+    return redirect("Admin:Userbooking")    
+
+
 
 

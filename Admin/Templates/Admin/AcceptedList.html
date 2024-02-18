@@ -16,6 +16,7 @@
                     <td>Contact</td>
                     <td>Email</td>
                     <td>Address</td>
+                    <td>Action</td>
                 </tr>
                 {% for i in selldata %}
                 <tr>
@@ -24,7 +25,6 @@
                     <td>{{i.contact}}</td>
                     <td>{{i.email}}</td>
                     <td>{{i.address}}</td>
-                    <td>Action</td>
                     <td>
                         <a href="{% url 'Admin:rejectlist' i.id %}">Reject</a>
                     </td>
