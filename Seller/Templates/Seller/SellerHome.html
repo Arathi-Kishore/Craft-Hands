@@ -1,12 +1,40 @@
 {% extends 'Seller/header.html' %}
 {% load static %}
 {% block content %}
-<html>
-    <center><h3>Welcome {{sdata.name}}</h3></center>
-    <br><br>
-    <a href="{% url 'Seller:MyProfile'%}">MyProfile</a><br>
-    <a href="{% url 'Seller:EditProfile'%}">EditProfile</a><br>
-    <a href="{% url 'Seller:ChangePassword'%}">ChangePassword</a><br>
-    <a href="{% url 'Seller:AddWork'%}">AddWork</a><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles can be added here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <h3>Welcome {{sdata.name}}</h3>
+                </div>
+                <br><br>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{% url 'Seller:MyProfile'%}" class="btn btn-primary btn-block">MyProfile</a></li>
+                    <li class="list-group-item"><a href="{% url 'Seller:EditProfile'%}" class="btn btn-primary btn-block">EditProfile</a></li>
+                    <li class="list-group-item"><a href="{% url 'Seller:ChangePassword'%}" class="btn btn-primary btn-block">ChangePassword</a></li>
+                    <li class="list-group-item"><a href="{% url 'Seller:AddWork'%}" class="btn btn-primary btn-block">AddWork</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
 {% endblock content %}

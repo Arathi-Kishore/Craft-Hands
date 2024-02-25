@@ -1,42 +1,52 @@
 {% extends 'User/header.html'%}
 {% load static %}
 {% block content %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <center><h1>Edit Profile</h1></center>
-    <form method="post" action="">
-        {% csrf_token %}
-        <table align="center" cellpadding="10" border="1">
-            <tr>
-                <td>Name</td>
-                <td><input type="text" id="" name="txt_name" value="{{udata.name}}"></td>
-            </tr>
-            <tr>
-                <td>Contact</td>
-                <td><input type="text" id="" name="txt_con" value="{{udata.contact}}"></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="email" id="" name="txt_email" value="{{udata.email}}"></td>
-            </tr>
-            <tr>
-                <td>Address</td>
-                <td><textarea name="txt_address" id="" cols="30" rows="10">{{udata.address}}</textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" name="btn_submit" id="" value="update">
-                <input type="reset" name="btn_cancel" id="" value="cancel"></td>
-                
-            </tr>
-        </table>
-    </form>
+    <div class="container">
+        <h1 class="text-center">Edit Profile</h1>
+        <form method="post" action="" class="mt-4">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="txt_name">Name</label>
+                        <input type="text" id="txt_name" name="txt_name" value="{{udata.name}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_con">Contact</label>
+                        <input type="text" id="txt_con" name="txt_con" value="{{udata.contact}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_email">Email</label>
+                        <input type="email" id="txt_email" name="txt_email" value="{{udata.email}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_address">Address</label>
+                        <textarea name="txt_address" id="txt_address" cols="30" rows="5" class="form-control">{{udata.address}}</textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" name="btn_submit" class="btn btn-primary">Update</button>
+                        <button type="reset" name="btn_cancel" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 {% endblock content %}

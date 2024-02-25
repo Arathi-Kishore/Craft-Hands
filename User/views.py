@@ -365,7 +365,7 @@ def mybookings(request):
     if 'uid' in request.session:
 
         usr=tbl_user.objects.get(id=request.session["uid"])
-        data=tbl_wcart.objects.filter(booking__user=usr)
+        data=tbl_wcart.objects.filter(wbooking__user=usr)
        
         #material booking display
         mdata=tbl_mcart.objects.filter(mbooking__user=usr)
@@ -426,5 +426,48 @@ def bill(request):
             return render(request,"User/bill.html")
     else:
         return redirect("Guest:login")
+
+def chatuser(request, cid):
+    chatobj = tbl_wcart.objects.get(id=cid)
+    if request.method == "POST":
+        cied = request.POST.get("cid")
+        # print(cied)
+        ciedobj = tbl_seller.objects.get(id=cied)
+        sobj = tbl_user.objects.get(id=request.session["uid"])
+        content = request.POST.get("msg")
+        # print(cied)
+        # print(content)
+        Chat.objects.create(
+            from_user=sobj, to_seller=ciedobj, content=content, from_seller=None, to_user=None)
+        return render(request, 'User/Chat.html', {"chatobj": chatobj})
+    else:
+        return render(request, 'User/Chat.html', {"chatobj": chatobj})
+
+def loadchatuser(request):
+    cid = request.GET.get("cid")
+    request.session["cid"] = cid
+
+    cid1 = request.session["cid"]
+    # print(cid1)
+
+    # print(cid)
+    shopobj = tbl_seller.objects.get(id=cid)
+    # print(userobj)
+    sid = request.session["uid"]
+    # print(sid)
+    suserobj = tbl_user.objects.get(id=request.session["uid"])
+    # chatobj1 = Chat.objects.filter(Q(to_user=suserobj) | Q(
+    #     from_user=suserobj), Q(to_shop=shopobj) | Q(from_shop=shopobj))
+    # print(chatobj1)  # send message
+
+    # print(chatobj2)  # recived msg
+    chatobj = Chat.objects.raw(
+        "select * from User_chat c inner join Guest_tbl_user u on (u.id=c.from_user_id) or (u.id=c.to_user_id) WHERE  c.from_seller_id=%s or c.to_seller_id=%s order by c.date", params=[(cid1), (cid1)])
+
+    print(chatobj.query)
+
+    return render(request, 'User/Load.html', {"obj": chatobj, "sid": sid, "shop": shopobj, "userobj": suserobj})
+
+
 
 

@@ -25,5 +25,7 @@ urlpatterns = [
     path('Mybookings/',views.mybookings,name="my_bookings"),
     path('deliver/',views.deliver,name="deliver"),
     path('bill/',views.bill,name="bill"),
+    path('Chat/<int:cid>/', views.chatuser, name="Chat-user"),
+    path('loadchat/', views.loadchatuser, name="load-chat"),
     
 ]

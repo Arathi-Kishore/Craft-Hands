@@ -7,68 +7,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <center><h1>Add Work</h1></center>
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-         <table border="2" align="center" cellpadding="10">
-            <tr>
-                <td>WorkType</td>
-                <td><select name="select_work" id="sel_work">
-                    <option value="">--select--</option>
-                    {% for i in worktypedata  %}
-                    <option value="{{i.id}}" >{{i.worktype}}</option>
-                    {% endfor %}    
-                    </select></td>   
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
-            </tr>
-            <tr>
-                <td>Rate</td>
-                <td><input type="text" name="txt_rate" id=""></td>
-            </tr>
-            <tr>
-                <td>Details</td>
-                <td><textarea name="txt_det" id="" cols="30" rows="10"></textarea></td>
-            </tr>
-            <tr>
-                <td>Image</td>
-                <td><input type="file" name="txt_pic" id=""></td>
-            </tr>
-            <tr>
-                <td>Videos</td>
-                <td><input type="file" name="txt_vid" id=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" name="" id="" value="Save">
-                    <input type="reset" name=""  id="" value="Cancel"></td>  
-            </tr>
-         </table>
-    </form>
-    <table border="2" align="center">
-        <tr>
-            <td>SI.no</td>
-            <td>Name</td>
-            <td>Rate</td>
-            <td>Details</td>
-            <td>Action</td>
-        </tr>
-        <tr>
-            {% for i in workdata %}
-            <td>{{forloop.counter}}</td> 
-            <td>{{i.name}}</td>
-            <td>{{i.rate}}</td>
-            <td>{{i.details}}</td>
-            <td><a href="{% url 'Seller:deletework' i.id %}">Delete</a>
-                <a href="{% url 'Seller:WorkGallery' i.id %}">WorkGallery</a> 
-                <a href="{% url 'Seller:AddMaterial' i.id %}">AddMaterial</a> 
-            </td>
-        </tr>
-        {% endfor %}
+    <div class="container">
+        <h1 class="text-center mt-5">Add Work</h1>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-bordered table-striped mt-3">
+                <tr>
+                    <td>WorkType</td>
+                    <td>
+                        <select class="form-control" name="select_work" id="sel_work">
+                            <option value="">--select--</option>
+                            {% for i in worktypedata  %}
+                            <option value="{{i.id}}" >{{i.worktype}}</option>
+                            {% endfor %}    
+                        </select>
+                    </td>   
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" class="form-control" name="txt_name" id=""></td>
+                </tr>
+                <tr>
+                    <td>Rate</td>
+                    <td><input type="text" class="form-control" name="txt_rate" id=""></td>
+                </tr>
+                <tr>
+                    <td>Details</td>
+                    <td><textarea class="form-control" name="txt_det" id="" cols="30" rows="10"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="file" class="form-control-file" name="txt_pic" id=""></td>
+                </tr>
+                <tr>
+                    <td>Videos</td>
+                    <td><input type="file" class="form-control-file" name="txt_vid" id=""></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" class="btn btn-primary" name="" id="" value="Save">
+                        <input type="reset" class="btn btn-secondary" name=""  id="" value="Cancel">
+                    </td>  
+                </tr>
+            </table>
+        </form>
+
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th>SI.no</th>
+                    <th>Name</th>
+                    <th>Rate</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in workdata %}
+                <tr>
+                    <td>{{forloop.counter}}</td> 
+                    <td>{{i.name}}</td>
+                    <td>{{i.rate}}</td>
+                    <td>{{i.details}}</td>
+                    <td>
+                        <a href="{% url 'Seller:deletework' i.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'Seller:WorkGallery' i.id %}" class="btn btn-primary">WorkGallery</a> 
+                        <a href="{% url 'Seller:AddMaterial' i.id %}" class="btn btn-success">AddMaterial</a> 
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
+    </div>
 </body>
 </html>
 {% endblock content %}

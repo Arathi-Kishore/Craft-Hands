@@ -24,6 +24,19 @@ class tbl_mcart(models.Model):
     material=models.ForeignKey(tbl_material,on_delete=models.CASCADE)
     mbooking=models.ForeignKey(tbl_mbooking,on_delete=models.CASCADE) 
 
+class Chat(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    from_user = models.ForeignKey(
+        tbl_user, on_delete=models.SET_NULL, default=False, null=True, related_name="from_user")
+    to_user = models.ForeignKey(
+        tbl_user, on_delete=models.SET_NULL, default=False, null=True, related_name="to_user")
+    from_seller = models.ForeignKey(
+        tbl_seller, on_delete=models.SET_NULL, default=False, null=True, related_name="from_seller")
+    to_seller = models.ForeignKey(
+        tbl_seller, on_delete=models.SET_NULL, default=False, null=True, related_name="to_seller")
+    content = models.TextField()
+
+
 
 
 

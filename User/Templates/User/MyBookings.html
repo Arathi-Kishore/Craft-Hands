@@ -1,0 +1,268 @@
+{% extends 'User/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="tab">
+        <form method="post">
+            {% if data and mdata %} <!---if1-->
+            <table align="center" border="1" cellpadding="10">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Product</th>
+                    <th>Details</th>
+                    <th>Rate</th>
+                    <th>Photo</th>
+                    <th>Seller</th>
+                    <th>Contact Info</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in data %} <!---for1-->
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.works.name}}</td>
+                    <td>{{i.works.details}}</td>
+                    <td>{{i.works.rate}}</td>
+                    <td><img src="{{i.works.image.url}}" alt="" width="150" height="150"></td>
+                    <td>{{i.works.seller.name}}</td>
+                    <td>{{i.works.seller.contact}}</td>
+                    <td>
+                        {% if i.booking.status == 0 and i.cstatus == 0 %}
+                        <p>Order is not completed</p>
+                        {% elif i.booking.status == 1 and i.cstatus == 0 %}
+                        <p>Paid | <a href="{% url 'User:cancelbooking' i.id %}">Cancel</a>|
+                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a> -->
+                        </p>
+                        {% elif i.cstatus == 2 %}
+                        <p>Cancelled</p>
+                        {% elif i.cstatus == 3 %}
+                        <p>Accepted |<a href="{% url 'User:cancelbooking' i.id %}">Cancel</a>|
+                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a>-->
+                        </p>
+                        {% elif i.cstatus == 4 %}
+                        <p>Rejected</p>
+                        {% elif i.cstatus == 5 %}
+                        <p>Order Packed</p>
+                        {% elif i.cstatus == 6 %}
+                        <p>Order Shipped</p>
+                        {% elif i.cstatus == 7 %}
+                        <p>Hands on delivery agent</p>
+                        {% elif i.cstatus == 8 %}
+                        <p>Order Delivered | <a href="{% url 'User:starrating' i.id %}">Rate Now</a>|
+                        <a href="{% url 'User:wreturnreason' i.id %}">Return</a></p>
+                        {% elif i.cstatus == 9 %}
+                        <p>Product Returned</p>
+                        {% elif  i.cstatus == 10 %}
+                        <p>Return Verified</p>
+                        {% else %}
+                        <p>Pending <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a></p>
+                        {% endif %}
+
+                    </td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                {% endfor %}<!---end for 1-->
+
+
+            </table>
+
+
+            <table align="center" border="1" cellpading="10">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Material</th>
+                    <th>Rate</th>
+                    <th>Photo</th>
+                    <th>Seller</th>
+                    <th>Contact Info</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in mdata %}<!---for 2-->
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.material.name}}</td>
+                    <td>{{i.material.rate}}</td>
+                    <td><img src="{{i.material.image.url}}" alt="" width="100" height="100"></td>
+                    <td>{{i.material.work.seller.name}}</td>
+                    <td>{{i.material.work.seller.contact}}</td>
+                    <td>
+                        {% if i.mbooking.status == 0  and i.cstatus == 0 %}
+                        <p>Order is not completed</p>
+                        {% elif i.mbooking.status == 1 and i.cstatus == 0 %}
+                   Cancel
+                            
+                        </p>
+                        {% elif i.cstatus == 1 %}
+                        <p>Order Accepted
+                           
+                        </p>
+                        {% elif i.cstatus == 2 %}
+                        <p>Item Packed
+                            </p>
+                        {% elif  i.cstatus == 3 %}
+                        <p>Item Shipped</p>
+                        {% elif i.cstatus == 4 %}
+                        <p>Item Dispatched</p>
+                        {% elif  i.cstatus == 5 %}
+                        <p>Item Delivered </p>
+                        {% elif  i.cstatus == 6 %}
+                        <p>Item Returned</p>
+                        {% elif  i.cstatus == 7 %}
+                        <p>Item Cancelled</p>
+                        {% elif  i.cstatus == 8 %}
+                        <p>Return Verified</p>
+                        {% elif  i.cstatus == 9 %}
+                        <p>Order Rejected</p>
+                        {% else %}
+                        <p>Pending <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a></p>
+                        {% endif %}
+
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                {% endfor %}<!---end for 2-->
+            </table>
+
+            {% elif data %}<!---if 2-->
+            <table align="center" border="1" cellpadding="10">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Product</th>
+                    <th>Details</th>
+                    <th>Rate</th>
+                    <th>Photo</th>
+                    <th>Seller</th>
+                    <th>Contact Info</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in data %}<!---for 3-->
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.works.name}}</td>
+                    <td>{{i.works.details}}</td>
+                    <td>{{i.works.rate}}</td>
+                    <td><img src="{{i.works.image.url}}" alt="" width="150" height="150"></td>
+                    <td>{{i.works.seller.name}}</td>
+                    <td>{{i.works.seller.contact}}</td>
+                    <td>
+                        {% if i.booking.status == 0 and i.cstatus == 0 %}
+                        <p>Order is not completed</p>
+                        {% elif i.booking.status == 1 and i.cstatus == 0 %}
+                        <p>Paid | Cancel |
+                            <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a>
+                        </p>
+                        {% elif i.cstatus == 2 %}
+                        <p>Cancelled</p>
+                        {% elif i.cstatus == 3 %}
+                        <p>Accepted |</p>
+                        {% elif i.cstatus == 4 %}
+                        <p>Rejected</p>
+                        {% elif i.cstatus == 5 %}
+                        <p>Order Packed</p>
+                        {% elif i.cstatus == 6 %}
+                        <p>Order Shipped</p>
+                        {% elif i.cstatus == 7 %}
+                        <p>Hands on delivery agent</p>
+                        {% elif i.cstatus == 8 %}
+                        <p>Order Delivered </p>
+                        {% elif i.cstatus == 9 %}
+                        <p>Product Returned</p>
+                        {% elif  i.cstatus == 10 %}
+                        <p>Return Verified</p>
+                        {% else %}
+                        <p>Pending  <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a></p>
+                        {% endif %}
+
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                {% endfor %} <!---end for3-->
+            </table>
+
+            {% elif mdata %}<!---if 3 -->
+            <table align="center" border="1" cellpadding="10">
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Material</th>
+                    <th>Rate</th>
+                    <th>Photo</th>
+                    <th>Seller</th>
+                    <th>Contact Info</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in mdata %}<!---for 4-->
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.material.name}}</td>
+                    <td>{{i.material.rate}}</td>
+                    <td><img src="{{i.material.image.url}}" alt="" width="100" height="100"></td>
+                    <td>{{i.material.work.seller.name}}</td>
+                    <td>{{i.material.work.seller.contact}}</td>
+                  
+                    <td>
+                        {% if i.mbooking.status == 0  and i.cstatus == 0 %}
+                        <p>Order is not completed</p>
+                        {% elif i.mbooking.status == 1 and i.cstatus == 0 %}
+                        <p>Paid /Cancel|
+                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a> -->
+                        </p>
+                        {% elif i.cstatus == 1 %}
+                        <p>Order Accepted|
+                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a> -->
+                        </p>
+                        {% elif i.cstatus == 2 %}
+                        <p>Item Packed
+                            </p>
+                        {% elif  i.cstatus == 3 %}
+                        <p>Item Shipped</p>
+                        {% elif i.cstatus == 4 %}
+                        <p>Item Dispatched</p>
+                        {% elif  i.cstatus == 5 %}
+                        <p>Item Delivered</p>
+                        {% elif  i.cstatus == 6 %}
+                        <p>Item Returned</p>
+                        {% elif  i.cstatus == 7 %}
+                        <p>Item Cancelled</p>
+                        {% elif  i.cstatus == 8 %}
+                        <p>Return Verified</p>
+                        {% elif  i.cstatus == 9 %}
+                        <p>Order Rejected</p>
+                        {% else %}
+                        <p>Pending <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a></p>
+                        {% endif %}
+
+                    </td>
+                    <td></td>
+                </tr>
+               
+                {% endfor %}<!---end for 4-->
+            </table>
+
+
+            {% else %}
+            <h5>EMPTY</h5>
+            {% endif %}
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock content %}

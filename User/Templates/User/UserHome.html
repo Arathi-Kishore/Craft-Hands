@@ -1,12 +1,40 @@
 {% extends 'User/header.html'%}
 {% load static %}
 {% block content %}
-<html>
-    <center><h3>Welcome {{udata.name}}</h3></center>
-    <br><br>
-    <a href="{% url 'User:MyProfile'%}">MyProfile</a><br>
-    <a href="{% url 'User:EditProfile'%}">EditProfile</a><br>
-    <a href="{% url 'User:ChangePassword'%}">ChangePassword</a><br>
-    <a href="{% url 'User:SearchSeller'%}">SearchSeller</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles can be added here */
+        body {
+            padding-top: 50px;
+        }
+        .container {
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <center><h3>Welcome {{udata.name}}</h3></center>
+        <br><br>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{% url 'User:MyProfile'%}" class="btn btn-primary btn-block">My Profile</a></li>
+            <li class="list-group-item"><a href="{% url 'User:EditProfile'%}" class="btn btn-primary btn-block">Edit Profile</a></li>
+            <li class="list-group-item"><a href="{% url 'User:ChangePassword'%}" class="btn btn-primary btn-block">Change Password</a></li>
+            <li class="list-group-item"><a href="{% url 'User:SearchSeller'%}" class="btn btn-primary btn-block">Search Seller</a></li>
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
 {% endblock content %}
