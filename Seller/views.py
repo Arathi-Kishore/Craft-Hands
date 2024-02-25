@@ -111,6 +111,47 @@ def reject(request,rid):
     sellerdata.save()
     return redirect("Admin:Userbooking")    
 
+def chatuser(request, cid):
+    chatobj = tbl_wbooking.objects.get(id=cid)
+    if request.method == "POST":
+        cied = request.POST.get("cid")
+        # print(cied)
+        ciedobj = tbl_user.objects.get(id=cied)
+        sobj = tbl_seller.objects.get(id=request.session["sid"])
+        content = request.POST.get("msg")
+        # print(cied)
+        # print(content)
+        Chat.objects.create(
+            from_seller=sobj, to_user=ciedobj, content=content, from_user=None, to_seller=None)
+        return render(request, 'Seller/Chat.html', {"chatobj": chatobj})
+    else:
+        return render(request, 'Seller/Chat.html', {"chatobj": chatobj})
+
+
+def loadchatuser(request):
+    cid = request.GET.get("cid")
+    request.session["cid"] = cid
+
+    cid1 = request.session["cid"]
+    # print(cid1)
+
+    # print(cid)
+    shopobj = tbl_user.objects.get(id=cid)
+    # print(userobj)
+    sid = request.session["sid"]
+    # print(sid)
+    suserobj = tbl_seller.objects.get(id=request.session["sid"])
+    # chatobj1 = Chat.objects.filter(Q(to_user=suserobj) | Q(
+    #     from_user=suserobj), Q(to_shop=shopobj) | Q(from_shop=shopobj))
+    # print(chatobj1)  # send message
+
+    # print(chatobj2)  # recived msg
+    chatobj = Chat.objects.raw(
+        "select * from User_chat c inner join Guest_tbl_seller u on (u.id=c.from_seller_id) or (u.id=c.to_seller_id) WHERE  c.from_user_id=%s or c.to_user_id=%s order by c.date", params=[(cid1), (cid1)])
+
+    print(chatobj.query)
+
+    return render(request, 'Seller/Load.html', {"obj": chatobj, "sid": sid, "shop": shopobj, "userobj": suserobj})
 
 
 

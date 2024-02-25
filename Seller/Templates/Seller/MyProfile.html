@@ -11,11 +11,66 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Profile</title>
+        <style>
+            .profilecard {
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                max-width: 500px;
+                margin: 0 auto;
+                background-color: #f9f9f9;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+    
+            .profilecard img {
+                display: block;
+                margin: 0 auto;
+                border-radius: 50%;
+                margin-bottom: 15px;
+            }
+    
+            .profilecard table {
+                width: 100%;
+            }
+    
+            .profilecard table td {
+                padding: 10px;
+            }
+    
+            .profilecard table tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+    
+            .profilecard table tr:hover {
+                background-color: #ddd;
+            }
+    
+            .profilecard table td:first-child {
+                font-weight: bold;
+            }
+    
+            .profilecard a {
+                color: #007bff;
+                text-decoration: none;
+            }
+    
+            .profilecard a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
         <h1 class="text-center mt-5">My Profile</h1>
         <form action="" method="post">
             {% csrf_token %}
-            <table class="table table-bordered table-striped mt-3" align="center">
+            <table class="table table-bordered table-striped mt-3 profilecard" align="center">
                 <tr>
                     <td colspan="2">
                         <img src="{{ sdata.photo.url }}" alt="{{ sdata.seller_photo.url }}" class="img-fluid rounded-circle" width="150" height="150">
@@ -41,9 +96,16 @@
                     <td>Address</td>
                     <td>{{ sdata.address }}</td>
                 </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <p><a href="{% url 'Seller:EditProfile' %}">EditProfile</a></p>
+                        <p><a href="{% url 'Seller:ChangePassword'%}">ChangePassword</a></p>
+                    </td>
+                </tr>
             </table>
         </form>
-    </div>
+    </body>
+    </html>
 </body>
 </html>
 {% endblock content %}

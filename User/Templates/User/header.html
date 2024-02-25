@@ -150,34 +150,33 @@
             <div class="offcanvas-body">
               <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a class="nav-link me-4 active" href="#billboard">Home</a>
+                  <a class="nav-link me-4 active" href="{% url 'User:UserHome' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#company-services">Services</a>
+                  <a class="nav-link me-4" href="{% url 'User:MyProfile' %}">MyProfile</a>
+                </li>
+                
+                
+                <li class="nav-item">
+                  <a class="nav-link me-4" href="{% url 'User:SearchSeller' %}">SearchSeller</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#mobile-products">Products</a>
+                  <a class="nav-link me-4" href="{% url 'User:my_bookings' %}">MyBookings</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
+                  <a class="nav-link me-4" href="{% url 'User:mycart' %}">MyCart</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link me-4" href="#latest-blog">Blog</a>
-                </li>
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                   <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="about.html" class="dropdown-item">About</a>
                     </li>
-                    <li>
-                      <a href="blog.html" class="dropdown-item">Blog</a>
+                    <li class="nav-item">
+                      <a class="nav-link me-4" href="{% url 'User:EditProfile' %}">EditProfile</a>
                     </li>
-                    <li>
-                      <a href="shop.html" class="dropdown-item">Shop</a>
+                    <li class="nav-item">
+                      <a class="nav-link me-4" href="{% url 'User:ChangePassword' %}">ChangePassword</a>
                     </li>
                     <li>
                       <a href="cart.html" class="dropdown-item">Cart</a>
@@ -195,7 +194,7 @@
                       <a href="contact.html" class="dropdown-item">Contact</a>
                     </li>
                   </ul>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <div class="user-items ps-5">
                     <ul class="d-flex justify-content-end list-unstyled">

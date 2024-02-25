@@ -2,15 +2,15 @@
 
 {% for i in obj %}
 
-{% if i.to_user.id == sid %}
+{% if i.to_seller.id == sid %}
 
 <div class="chat-message is-received">
     <!-- image -->
-    <img class="user-avatar" src="{{i.from_seller.photo.url}}" alt="">
+    <img class="user-avatar" src="{{i.from_user.photo.url}}" alt="">
     <div class="message-block">
         <span>
 
-            {{i.from_doctor.name}}
+            {{i.from_user.name}}
         </span>
         <div class="message-text">
             {{i.content}}
@@ -25,14 +25,14 @@
 <!-- send -->
 
 
-{% if i.from_user.id == sid %}
+{% if i.from_seller.id == sid %}
 
 <div class="chat-message is-sent">
     <!-- img -->
-    <img class="user-avatar" src="{{i.from_user.photo.url}}" alt="">
+    <img class="user-avatar" src="{{i.from_seller.photo.url}}" alt="">
     <div class="message-block">
         <span>
-            {{i.from_user.name}}
+            {{i.from_seller.name}}
         </span>
         <div class="message-text">
             {{i.content}}

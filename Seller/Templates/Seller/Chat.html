@@ -35,18 +35,18 @@
                 <div class="nav-start">
                     <div class="recipient-block">
                         <div class="avatar-container">
-                            <img class="user-avatar" src="{{chatobj.works.seller.photo.url}}" alt="">
+                            <img class="user-avatar" src="{{chatobj.user.photo.url}}" alt="">
                         </div>
                         <div class="username">
                             <span>
-                                {{ chatobj.works.seller.name }}
+                                {{ chatobj.user.name }}
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="nav-end">
 
-                    <a href="{% url 'User:my_bookings'  %}" class="chat-nav-item is-icon is-hidden-mobile">
+                    <a href="{% url 'Seller:Userbooking'  %}" class="chat-nav-item is-icon is-hidden-mobile">
                         <i data-feather="home"></i>
                     </a>
 
@@ -65,7 +65,7 @@
                     <div class="chat-action">
                         <div class="chat-action-inner">
                             <div class="control" style="text-align: center">
-                                <input type="hidden" name="cid" id="cid" value="{{chatobj.works.seller.id}}" />
+                                <input type="hidden" name="cid" id="cid" value="{{chatobj.user.id}}" />
                                 <textarea class="textarea comment-textarea" id="msg" name="msg" rows="2"></textarea>
                                 <input type="submit" value="Send" name="btn_send" id="btn_send" style="border: none;background-color: #5082c3;border-radius: 15px 10px; color: white;
                                        margin: 10px; margin-bottom: 30px ; width: 30%; height: 25px">
@@ -114,7 +114,7 @@
             setInterval(function () {
                 var cid = document.getElementById("cid").value;
                 console.log(cid);
-                $("#conversation").load('/User/loadchat/?cid=' + cid)
+                $("#conversation").load('/Seller/loadchat/?cid=' + cid)
             }, 50);
         });
 

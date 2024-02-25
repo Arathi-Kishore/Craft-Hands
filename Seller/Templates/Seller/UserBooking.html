@@ -44,6 +44,7 @@
                             <td>
                                 <a href="{% url 'Seller:acceptlist' i.wbooking.id %}" class="btn btn-success btn-sm">Accept</a>
                                 <a href="{% url 'Seller:rejectlist' i.wbooking.id %}" class="btn btn-danger btn-sm">Reject</a>
+                                <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a>
                             </td>
                         </tr>
                         {% endfor %}

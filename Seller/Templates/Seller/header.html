@@ -150,34 +150,36 @@
             <div class="offcanvas-body">
               <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a class="nav-link me-4 active" href="#billboard">Home</a>
+                  <a class="nav-link me-4 active" href="{% url 'Seller:SellerHome' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#company-services">Services</a>
+                  <a class="nav-link me-4" href="{% url 'Seller:MyProfile' %}">MyProfile</a>
+                </li>
+               
+               
+                <li class="nav-item">
+                  <a class="nav-link me-4" href="{% url 'Seller:AddWork' %}">AddWork</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#mobile-products">Products</a>
+                  <a class="nav-link me-4" href="{% url 'Seller:Userbooking' %}">UserBooking</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link me-4" href="{% url 'Seller:AcceptedList' %}">Acceptedlist</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-4" href="#smart-watches">Watches</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link me-4" href="#yearly-sale">Sale</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link me-4" href="#latest-blog">Blog</a>
-                </li>
+                  <a class="nav-link me-4" href="{% url 'Seller:RejectedList' %}">Rejectedlist</a>
+              </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
                   <ul class="dropdown-menu">
                     <li>
                       <a href="about.html" class="dropdown-item">About</a>
                     </li>
-                    <li>
-                      <a href="blog.html" class="dropdown-item">Blog</a>
+                    <li class="nav-item">
+                      <a class="nav-link me-4" href="{% url 'Seller:EditProfile' %}">EditProfile</a>
                     </li>
-                    <li>
-                      <a href="shop.html" class="dropdown-item">Shop</a>
+                    <li class="nav-item">
+                      <a class="nav-link me-4" href="{% url 'Seller:ChangePassword' %}">ChangePassword</a>
                     </li>
                     <li>
                       <a href="cart.html" class="dropdown-item">Cart</a>

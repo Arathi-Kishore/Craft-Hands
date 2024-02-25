@@ -19,5 +19,6 @@ urlpatterns = [
     path('acceptlist/<int:aid>',views.accept,name="acceptlist"),
     path('rejectlist/<int:rid>',views.reject,name="rejectlist"),
 
-    
+    path('Chat/<int:cid>/', views.chatuser, name="Chat-user"),
+    path('loadchat/', views.loadchatuser, name="load-chat"),
 ]   

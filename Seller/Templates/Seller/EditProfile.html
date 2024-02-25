@@ -11,11 +11,64 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Profile</title>
+        <style>
+            /* Custom CSS for profile card */
+            .profilecard {
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                max-width: 500px;
+                margin: 0 auto;
+                background-color: #f9f9f9;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+    
+            .profilecard input[type="text"],
+            .profilecard input[type="email"],
+            .profilecard textarea {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+    
+            .profilecard input[type="submit"],
+            .profilecard input[type="reset"] {
+                width: 48%;
+                margin-right: 2%;
+            }
+    
+            .profilecard input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+            }
+    
+            .profilecard input[type="reset"] {
+                background-color: #6c757d;
+                color: #fff;
+                border: none;
+            }
+    
+            .profilecard input[type="submit"]:hover,
+            .profilecard input[type="reset"]:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
         <h1 class="text-center mt-5">Edit Profile</h1>
-        <form method="post" action="">
+        <form method="post" action="" class="profilecard">
             {% csrf_token %}
-            <table class="table table-bordered table-striped mt-3" align="center">
+            <table class="table table-bordered table-striped mt-3">
                 <tr>
                     <td>Name</td>
                     <td><input type="text" class="form-control" name="txt_name" value="{{sdata.name}}"></td>
@@ -40,7 +93,8 @@
                 </tr>
             </table>
         </form>
-    </div>
+    </body>
+    </html>
 </body>
 </html>
 {% endblock content %}
