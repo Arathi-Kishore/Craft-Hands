@@ -20,5 +20,6 @@ urlpatterns=[
     path('rejectedlist/',views.rejectlist,name="RejectedList"),
     path('acceptlist/<int:aid>',views.accept,name="acceptlist"),
     path('rejectlist/<int:rid>',views.reject,name="rejectlist"),
+    path('adminhome/',views.adminhome,name="AdminHome"),
 
 ]

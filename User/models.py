@@ -37,6 +37,18 @@ class Chat(models.Model):
     content = models.TextField()
 
 
+class tbl_star(models.Model):
+    rating_data=models.IntegerField()
+    user_name=models.CharField(max_length=50)
+    user_review=models.CharField(max_length=50)
+    datetime=models.DateField(auto_now_add=True)
+    work_id=models.ForeignKey(tbl_work,on_delete=models.CASCADE)
+
+class tbl_videopay(models.Model):
+    seller=models.ForeignKey(tbl_seller,on_delete=models.CASCADE)
+    user=models.ForeignKey(tbl_user,on_delete=models.CASCADE) 
+
+
 
 
 

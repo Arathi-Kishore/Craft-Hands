@@ -59,7 +59,7 @@
                         <p>Hands on delivery agent</p>
                         {% elif i.cstatus == 8 %}
                         <p>Order Delivered | <a href="{% url 'User:starrating' i.id %}">Rate Now</a>|
-                        <a href="{% url 'User:wreturnreason' i.id %}">Return</a></p>
+                      
                         {% elif i.cstatus == 9 %}
                         <p>Product Returned</p>
                         {% elif  i.cstatus == 10 %}

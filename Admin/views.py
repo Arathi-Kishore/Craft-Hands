@@ -126,5 +126,8 @@ def reject(request,rid):
     sellerdata=tbl_seller.objects.get(id=rid)
     sellerdata.status=2
     sellerdata.save()
-    return redirect("Admin:ViewSellerList")    
+    return redirect("Admin:ViewSellerList")
+
+def adminhome(request):
+    return render(request,"Admin/AdminHome.html")        
 

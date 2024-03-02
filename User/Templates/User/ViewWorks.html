@@ -29,6 +29,7 @@
                         <br>
                         <p><a href="{% url 'User:ViewWorkMaterial' i.id %}">View Material</a></p>
                         <p><a href="{% url 'User:addtocart' i.id%}">Add to Cart</a></p>
+                        <p><a href="{% url 'User:videopay' i.seller.id %}">View Video</a></p>
                     </div>
                 </td>
                 {% if forloop.counter|divisibleby:4 %}

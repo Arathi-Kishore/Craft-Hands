@@ -24,4 +24,10 @@ class tbl_seller(models.Model):
     proof=models.FileField(upload_to="MemberDocs/")
     status=models.IntegerField(default=0)
     place=models.ForeignKey(tbl_place,on_delete=models.CASCADE)
+
+class tbl_adminlogin(models.Model):
+    name=models.CharField(max_length=50)
+    email=models.CharField(max_length=50)
+    password=models.CharField(max_length=50)
+            
     

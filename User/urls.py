@@ -27,5 +27,8 @@ urlpatterns = [
     path('bill/',views.bill,name="bill"),
     path('Chat/<int:cid>/', views.chatuser, name="Chat-user"),
     path('loadchat/', views.loadchatuser, name="load-chat"),
+    path('star/<int:mid>',views.starrating,name="starrating"),
+    path('ajaxstar/',views.ajaxstar,name="ajaxstar"),
+    path('videopay/<int:id>',views.videopay,name="videopay"),
     
 ]

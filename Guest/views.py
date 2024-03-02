@@ -20,6 +20,8 @@ def login(request):
 
         ucount=tbl_user.objects.filter(email=Email,password=Password).count()
         scount=tbl_seller.objects.filter(email=Email,password=Password,status=1).count()
+        acount=tbl_adminlogin.objects.filter(email=Email,password=Password).count()
+        
         if ucount > 0:
             userdata=tbl_user.objects.get(email=Email,password=Password)
             request.session['uid']=userdata.id
@@ -27,7 +29,11 @@ def login(request):
         elif scount > 0:
             sellerdata=tbl_seller.objects.get(email=Email,password=Password)
             request.session['sid']=sellerdata.id
-            return redirect('Seller:SellerHome')    
+            return redirect('Seller:SellerHome')
+        elif acount > 0:
+            admindata=tbl_adminlogin.objects.get(email=Email,password=Password)
+            request.session['aid']=admindata.id
+            return redirect('Admin:AdminHome')            
         else:
             msg = "Invalid Credentials!!"
             return render(request,"Guest/Login.html",{'msg':msg})

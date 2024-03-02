@@ -379,7 +379,36 @@ def removecart(request,did):
 def removecart1(request,did):
     tbl_mcart.objects.get(id=did).delete()
     return redirect('User:mycart')
+def starrating(request,mid):
+    parray=[1,2,3,4,5]
+    mid=mid
+    cdata=tbl_wcart.objects.get(id=mid)
+    wid=cdata.works.id
+    wdata=tbl_work.objects.get(id=wid)
+    counts=0
+    counts=tbl_star.objects.filter(work_id=wdata).count()
+    if counts>0:
+        res=0
+        stardata=tbl_star.objects.filter(work_id=wdata).order_by('-datetime')
+        for i in stardata:
+            res=res+i.rating_data
+        avg=res//counts
+        return render(request,"User/WorkRating.html",{'mid':mid,'data':stardata,'ar':parray,'avg':avg,'count':counts})
+    else:
+         return render(request,"User/WorkRating.html",{'mid':mid})
 
+def ajaxstar(request):
+    parray=[1,2,3,4,5]
+    rating_data=request.GET.get('rating_data')
+    user_name=request.GET.get('user_name')
+    user_review=request.GET.get('user_review')
+    workid=request.GET.get('workid')
+    cdata=tbl_wcart.objects.get(id=workid)
+    wid=cdata.works.id
+    wdata=tbl_work.objects.get(id=wid)
+    tbl_star.objects.create(user_name=user_name,user_review=user_review,rating_data=rating_data,work_id=wdata)
+    stardata=tbl_star.objects.filter(work_id=wdata).order_by('-datetime')
+    return render(request,"User/AjaxRating.html",{'data':stardata,'ar':parray})
         
 
 def deliver(request):
@@ -467,6 +496,13 @@ def loadchatuser(request):
     print(chatobj.query)
 
     return render(request, 'User/Load.html', {"obj": chatobj, "sid": sid, "shop": shopobj, "userobj": suserobj})
+
+def videopay(request,id):
+    userdata=tbl_user.objects.get(id=request.session['uid'])
+    sellerdata=tbl_seller.objects.get(id=request.session['id'])
+    vpaydata=tbl_videopay.objects.filter(seller=sellerdata,user=userdata).count()
+    
+    return render(request,'User/Videopay')
 
 
 

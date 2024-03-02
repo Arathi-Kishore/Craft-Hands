@@ -8,4 +8,5 @@ urlpatterns=[
     path('SellerRegistration/',views.seller,name="SellerRegistration"),
     path('',views.index,name="index"),
     
+    
 ]
