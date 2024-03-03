@@ -1,0 +1,75 @@
+<style>
+    body {
+        background-color: rgb(224, 224, 224);
+    }
+    .card-c {
+        background-color: white;
+        padding: 16px;
+        border-radius: 16px;
+        width: fit-content;
+        margin-left: 62px;
+        justify-content: space-between;
+        box-shadow: 30px 29px 30px black;
+
+    }
+
+    .page-con {
+        margin-bottom: 150px;
+    }
+
+    .space {
+        padding-top: 5px;
+    }
+</style>
+       <div class="container">
+            <div class="row" id="result"  style="margin-top: 40px;">
+                {% for i,j in data %}
+                <div class="col-3 card-c">
+                    <div><img src="{{i.image.url}}" width="150" height="150" style="border-radius: 15px;"></div>
+                    <div class="space">{{i.name}}</div>
+                    <div class="space">{{i.rate}}</div>
+                    <div class="space">{{i.details}}</div>
+                      <div class="space">
+                {% for k in ar %} {% if k <= j %}
+                <i class="fas fa-star text-warning"></i>
+                {% else %}
+                <i class="fas fa-star star-light"></i>
+                {% endif %} {% endfor %}
+              </div>
+                    <div class="space"><p class="link-a"><a href="{% url 'User:addtocart' i.id %}" style="color: white;">Add to Cart</a></p><p class="link-a"><a href="{% url 'User:viewgal' i.id %}" style="color: white;">Gallery</a></p>
+                    </div>
+                    <div class="space"><p class="link-a"></p>
+                    <p class="link-a"><a href="{% url 'User:ViewWorkMaterial' i.id %}" style="color: white;" >Materials</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+          </div>
+
+<!-- <table cellpadding="60" id="result">
+            
+    <tr>
+    {% for i in data %}
+
+        <td>
+            <div style="border: 1px solid black;align-items: center;">
+       
+            <p>{{i.name}}</p>
+            <p>{{i.rate}}/-</p>
+            <p>{{i.details}}</p>
+            <p><img src="{{i.image.url}}" width="150" height="150"></p>
+            <p><a href="{% url 'User:addtocart' i.id %}">Add to Cart</a></p>
+            <p><a href="{% url 'User:viewgal' i.id %}">ViewGallery</a></p>
+            <p><a href="{% url 'User:proceed' i.id %}">ViewTutorials</a></p>
+            <p><a href="{% url 'Seller:materials' i.id %}">ViewMaterials</a></p>
+
+            </div>
+        </td>
+        {% if forloop.counter|divisibleby:4 %}
+
+    </tr>
+    <tr>
+        {% endif %}
+    {% endfor %}
+    </tr>
+</table> -->

@@ -25,6 +25,7 @@ urlpatterns = [
     path('Mybookings/',views.mybookings,name="my_bookings"),
     path('deliver/',views.deliver,name="deliver"),
     path('bill/',views.bill,name="bill"),
+        path('AjaxWork/', views.AjaxWork,name="AjaxWork"),
     path('Chat/<int:cid>/', views.chatuser, name="Chat-user"),
     path('loadchat/', views.loadchatuser, name="load-chat"),
     path('star/<int:mid>',views.starrating,name="starrating"),
