@@ -21,5 +21,6 @@ urlpatterns=[
     path('acceptlist/<int:aid>',views.accept,name="acceptlist"),
     path('rejectlist/<int:rid>',views.reject,name="rejectlist"),
     path('adminhome/',views.adminhome,name="AdminHome"),
+    path('viewcomplaints/',views.viewcomplaints,name="ViewComplaints"),
 
 ]

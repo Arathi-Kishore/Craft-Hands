@@ -52,7 +52,7 @@ def changepass(request):
                    
 
 def viewwork(request,sid):
-    sif 'uid' in request.session:
+    if 'uid' in request.session:
         ar=[1,2,3,4,5]
         parry=[]
         avg=0
@@ -92,7 +92,7 @@ def AjaxWork(request):
             tot=0
             ratecount=tbl_star.objects.filter(work_id=wdata).count()
             if ratecount>0:
-                ratedata=star.objects.filter(work=wdata)
+                ratedata=tbl_star.objects.filter(work=wdata)
                 for j in ratedata:
                     tot=tot+j.rating_data
                 avg=tot//ratecount
@@ -551,6 +551,31 @@ def videopay(request,id):
     vpaydata=tbl_videopay.objects.filter(seller=sellerdata,user=userdata).count()
     
     return render(request,'User/Videopay')
+
+
+def complaint(request):
+    udata=tbl_user.objects.get(id=request.session['uid'])
+
+    compdata=tbl_complaint.objects.all()
+    if request.method=="POST":
+        tbl_complaint.objects.create(    
+            title = request.POST.get("txt_title"),
+            content = request.POST.get("txt_content"),
+            user=udata,
+
+        )
+        return render(request,"User/Complaint.html",{'udata':udata,'compdata':compdata}) 
+    else:
+        return render(request,"User/Complaint.html",{'udata':udata,'compdata':compdata})
+
+def DeleteComplaint(request,did):
+    tbl_complaint.objects.get(id=did).delete()
+    return redirect("User:complaint")        
+
+
+
+    
+    
 
    
 

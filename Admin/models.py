@@ -1,5 +1,5 @@
 from django.db import models
-
+# from User.models import *
 # Create your models here.
 class tbl_worktype (models.Model):
     worktype=models.CharField(max_length=50)

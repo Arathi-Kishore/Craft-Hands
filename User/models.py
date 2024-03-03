@@ -48,6 +48,16 @@ class tbl_videopay(models.Model):
     seller=models.ForeignKey(tbl_seller,on_delete=models.CASCADE)
     user=models.ForeignKey(tbl_user,on_delete=models.CASCADE) 
 
+class tbl_complaint(models.Model):
+    title=models.CharField(max_length=50) 
+    content=models.CharField(max_length=50)
+    status=models.IntegerField(default=0) 
+    reply=models.CharField(max_length=50)
+    reply_date=models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
+    seller=models.ForeignKey(tbl_seller,on_delete=models.SET_NULL,null=True)
+    user=models.ForeignKey(tbl_user,on_delete=models.SET_NULL,null=True)     
+
 
 
 

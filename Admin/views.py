@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import *
 from Guest.models import *
+from User.models import *
 # Create your views here.
 
 def dis(request):
@@ -129,5 +130,11 @@ def reject(request,rid):
     return redirect("Admin:ViewSellerList")
 
 def adminhome(request):
-    return render(request,"Admin/AdminHome.html")        
+    return render(request,"Admin/AdminHome.html") 
 
+def viewcomplaints(request):
+    userdata=tbl_user.objects.all()
+    sellerdata=tbl_seller.objects.all()
+    usercomplaint=tbl_complaint.objects.filter(user__in=userdata)
+    sellercomplaint=tbl_complaint.objects.filter(seller__in=sellerdata)
+    return render(request,"Admin/ViewComplaints.html",{'usercomplaint':usercomplaint,'sellercomplaint':sellercomplaint})

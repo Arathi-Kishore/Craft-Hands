@@ -154,4 +154,27 @@ def loadchatuser(request):
     return render(request, 'Seller/Load.html', {"obj": chatobj, "sid": sid, "shop": shopobj, "userobj": suserobj})
 
 
+def complaint(request):
+    sdata=tbl_seller.objects.get(id=request.session['sid'])
+
+    compdata=tbl_complaint.objects.all()
+    if request.method=="POST":
+        tbl_complaint.objects.create(    
+            title = request.POST.get("txt_title"),
+            content = request.POST.get("txt_content"),
+            seller=sdata,
+
+        )
+        return render(request,"Seller/Complaint.html",{'sdata':sdata,'compdata':compdata}) 
+    else:
+        return render(request,"Seller/Complaint.html",{'sdata':sdata,'compdata':compdata})
+
+def DeleteComplaint(request,did):
+    tbl_complaint.objects.get(id=did).delete()
+    return redirect("Seller:complaint")        
+
+  
+
+    
+
 

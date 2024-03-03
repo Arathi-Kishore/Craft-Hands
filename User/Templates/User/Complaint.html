@@ -22,12 +22,26 @@
                 <input type="reset" name=""  id="" value="Cancel"></td>  
             </tr>
         </table>
+    </form>
+    <br><br><br>
+        <table align="center" cellpadding="10" border="2">
         <tr>
             <td>Sl.no</td>
             <td>Title</td>
             <td>Content</td>
             <td>Action</td>
+            
         </tr>
-    </form>
+        
+        
+        {% for i in compdata %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.title }}</td>
+            <td>{{ i.content }}</td>
+            <td><a href="{% url 'User:delcomplaint' i.id %}"> Delete</a></td>
+        </tr>
+            {% endfor %}
+        </table> 
 </body>
 </html>

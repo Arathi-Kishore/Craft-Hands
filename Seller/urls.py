@@ -21,4 +21,6 @@ urlpatterns = [
 
     path('Chat/<int:cid>/', views.chatuser, name="Chat-user"),
     path('loadchat/', views.loadchatuser, name="load-chat"),
+    path('complaint/',views.complaint,name="complaint"),
+    path('delcomplaint/<int:did>',views.DeleteComplaint,name="delcomplaint"),
 ]   
