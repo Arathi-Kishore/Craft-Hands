@@ -52,10 +52,58 @@ def changepass(request):
                    
 
 def viewwork(request,sid):
-    sdata=tbl_seller.objects.get(id=sid)
-    wdata=tbl_work.objects.filter(seller=sdata)
-    rdata=tbl_seller.objects.all()
-    return render(request,"User/ViewWorks.html",{'wdata':wdata,'rdata':rdata})
+    sif 'uid' in request.session:
+        ar=[1,2,3,4,5]
+        parry=[]
+        avg=0
+        request.session["selid"]=sid
+        sellerdata=tbl_seller.objects.get(id=sid)
+        data=tbl_work.objects.filter(seller=sellerdata)
+        workdata=tbl_worktype.objects.all()
+        for i in data:
+            wdata=tbl_work.objects.get(id=i.id)
+            tot=0
+            ratecount=tbl_star.objects.filter(work_id=wdata).count()
+            if ratecount>0:
+                ratedata=tbl_star.objects.filter(work_id=wdata)
+                for j in ratedata:
+                    tot=tot+j.rating_data
+                avg=tot//ratecount
+                parry.append(avg)
+            else:
+                parry.append(0)
+        datas=zip(data,parry)
+        return render(request,"User/ViewWorks.html",{'data':datas,'work':workdata,'ar':ar})
+    else:
+        return redirect("Guest:login")
+
+
+def AjaxWork(request):
+    if 'uid' in request.session:
+        ar=[1,2,3,4,5]
+        parry=[]
+        avg=0
+        sellerdata=tbl_seller.objects.get(id= request.session["selid"])
+
+        worktypedata=tbl_worktype.objects.get(id=request.GET.get('did'))
+        data=tbl_work.objects.filter(seller=sellerdata,worktype=worktypedata)
+        for i in data:
+            wdata=tbl_work.objects.get(id=i.id)
+            tot=0
+            ratecount=tbl_star.objects.filter(work_id=wdata).count()
+            if ratecount>0:
+                ratedata=star.objects.filter(work=wdata)
+                for j in ratedata:
+                    tot=tot+j.rating_data
+                avg=tot//ratecount
+                parry.append(avg)
+            else:
+                parry.append(0)
+        datas=zip(data,parry)
+        return render(request,"User/AjaxWork.html",{'data':datas,'ar':ar})
+    else:
+        return redirect("Guest:login")
+
 
 def viewworkmaterial(request,sid):
     sdata=tbl_work.objects.get(id=sid)

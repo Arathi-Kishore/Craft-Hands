@@ -1,46 +1,164 @@
-{% extends 'User/header.html' %}
-{% load static %}
+{% extends 'User/header.html' %} 
+{% load static %} 
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <center><h1>View Works</h1></center>
-    <form action="" method="post" enctype="multipart/form-data">
-        {%csrf_token %}
-        <table align="center" cellpadding="50" style="border-collapse: collapse" id="result">
+  </head>
+  <style>
+    body {
+      background-color: rgb(224, 224, 224);
+    }
+    .card-c {
+      background-color: white;
+      padding: 16px;
+      display: flex;
+      border-radius: 16px;
+      width: fit-content;
+      margin-left: 62px;
+      justify-content: space-between;
+      box-shadow: 30px 29px 30px black;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page-con {
+      margin-bottom: 150px;
+    }
+
+    .space {
+      padding-top: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .link-a {
+      background-color: #2ac191;
+      padding: 6px 14px;
+      width: 127px;
+      display: flex;
+      justify-content: center;
+      border-radius: 7px;
+      margin-right: 9px;
+    }
+  </style>
+  <body>
+    <div id="tab">
+      <form
+        action=""
+        method="post"
+        id="viewworkform"
+        enctype="multipart/form-data"
+        data-work-url="{% url 'User:AjaxWork'%}">
+        <table align="center" border="1" cellpadding="10">
+          <tr>
+            <td>Worktype</td>
+            <td>
+              <select name="worktype" id="worktype" required="">
+                <option value="">--select--</option>
+                {% for i in work %}
+                <option value="{{i.id}}">{{i.worktype}}</option>
+                {% endfor %}
+              </select>
+            </td>
+          </tr>
+        </table>
+        <div class="container">
+          <div class="row" id="result" style="margin-top: 40px">
+            {% for i,j in data %}
+            <div class="col-3 card-c">
+              <div>
+                <img
+                  src="{{i.image.url}}"
+                  width="150"
+                  height="150"
+                  style="border-radius: 15px" />
+              </div>
+              <div class="space">{{i.name}}</div>
+              <div class="space">
+                <i class="fas fa-rupee-sign"></i> {{i.rate}}
+              </div>
+              <div class="space">{{i.details}}</div>
+              <div class="space">
+                {% for k in ar %} {% if k <= j %}
+                <i class="fas fa-star text-warning"></i>
+                {% else %}
+                <i class="fas fa-star star-light"></i>
+                {% endif %} {% endfor %}
+              </div>
+
+              <div class="space">
+                <p class="link-a">
+                  <a href="{% url 'User:addtocart' i.id %}" style="color: white"
+                    >Add to Cart</a
+                  >
+                </p>
+                
+                </p>
+              </div>
+              <div class="space">
+                
+                <p class="link-a">
+                  <a
+                    href="{% url'User:ViewWorkMaterial' i.id  %}"
+                    style="color: white"
+                    >Materials</a
+                  >
+                </p>
+                
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <!-- <table cellpadding="60" id="result">
+            
             <tr>
-                {% for i in wdata %}
-    
+            {% for i in data %}
+        
                 <td>
-                    <div style="text-align:center;border:1px solid black;margin:22px;padding:20px">
-    
-                        <p><img src="{{i.image.url}}" width="100px" height="100px" /></p>
-                        <br>
-                        <p>{{i.name}}</p>
-                        <br>
-                        <p>{{i.code}}</p>
-                        <br>
-                        <p>{{i.rate}}</p>
-                        <br>
-                        <p><a href="{% url 'User:ViewWorkMaterial' i.id %}">View Material</a></p>
-                        <p><a href="{% url 'User:addtocart' i.id%}">Add to Cart</a></p>
-                        <p><a href="{% url 'User:videopay' i.seller.id %}">View Video</a></p>
+                    <div style="border: 1px solid black;align-items: center;">
+               
+                    <p>{{i.name}}</p>
+                    <p>{{i.rate}}/-</p>
+                    <p>{{i.details}}</p>
+                    <p><img src="{{i.image.url}}" width="150" height="150"></p>
+                   
+                    <p><a href="{% url 'User:addtocart' i.id %}">Add to Cart</a></p>
+                    <p><a href="{% url 'User:viewgal' i.id %}">ViewGallery</a></p>
+                    <p><a href="{% url 'User:proceed' i.id %}">ViewTutorials</a></p>
+                    <p><a href="{% url 'User:vmaterials' i.id %}">ViewMaterials</a></p>
+
                     </div>
                 </td>
-                {% if forloop.counter|divisibleby:4 %}
+                {% if forloop.counter|divisibleby:4 %} 
+
             </tr>
             <tr>
                 {% endif %}
-    
-    
-                {% endfor %}
-        </table>
-    </form>
-</body>
+            {% endfor %}
+            </tr>
+        </table> -->
+      </form>
+    </div>
+  </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $('#worktype').change(function () {
+    var did = $(this).val()
+    var ur = $('#viewworkform').attr('data-work-url')
+    $.ajax({
+      url: ur,
+      data: { did: did },
+      success: function (data) {
+        $('#result').html(data)
+      },
+    })
+  })
+</script>
 {% endblock content %}
