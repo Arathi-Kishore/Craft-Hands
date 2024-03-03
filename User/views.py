@@ -504,6 +504,8 @@ def videopay(request,id):
     
     return render(request,'User/Videopay')
 
+   
+
 
 
 

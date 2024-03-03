@@ -30,5 +30,6 @@ urlpatterns = [
     path('star/<int:mid>',views.starrating,name="starrating"),
     path('ajaxstar/',views.ajaxstar,name="ajaxstar"),
     path('videopay/<int:id>',views.videopay,name="videopay"),
+ 
     
 ]

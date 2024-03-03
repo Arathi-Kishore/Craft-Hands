@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        <table border="2" align="center" cellpadding="10">
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="txt_title" id=""></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><input type="text" name="txt_content" id=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="" id="" value="Save">
+                <input type="reset" name=""  id="" value="Cancel"></td>  
+            </tr>
+        </table>
+        <tr>
+            <td>Sl.no</td>
+            <td>Title</td>
+            <td>Content</td>
+            <td>Action</td>
+        </tr>
+    </form>
+</body>
+</html>
