@@ -60,12 +60,12 @@ def addwork(request):
 
 def addmat(request,wid):
     wdata=tbl_work.objects.get(id=wid)
-    materialdata=tbl_material.objects.all()
+    materialdata=tbl_material.objects.filter(work=wdata)
     if request.method=="POST":
         tbl_material.objects.create(name=request.POST.get('txt_name'),rate=request.POST.get('txt_rate'),description=request.POST.get('txt_des'),image=request.FILES.get('txt_pic'),stock=request.POST.get('txt_stock'),work=wdata)
-        return render(request,"Seller/AddMaterial.html",{'wdata':wdata})
+        return render(request,"Seller/AddMaterial.html",{'wdata':wdata,'mdata':materialdata})
     else:
-        return render(request,"Seller/AddMaterial.html",{'wdata':wdata})   
+        return render(request,"Seller/AddMaterial.html",{'wdata':wdata,'mdata':materialdata})   
 
 def DeleteMaterial(request,did):
     tbl_material.objects.get(id=did).delete()
@@ -109,7 +109,7 @@ def reject(request,rid):
     sellerdata=tbl_wbooking.objects.get(id=rid)
     sellerdata.status=2
     sellerdata.save()
-    return redirect("Admin:Userbooking")    
+    return redirect("Seller:Userbooking")    
 
 def chatuser(request, cid):
     chatobj = tbl_wbooking.objects.get(id=cid)
@@ -174,7 +174,9 @@ def DeleteComplaint(request,did):
     return redirect("Seller:complaint")        
 
   
-
+def logout(request):
+    del request.session["sid"]
+    return redirect("Guest:login")
     
 
 

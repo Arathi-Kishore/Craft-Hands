@@ -7,6 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        span.required {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <center><h1>Add Material</h1></center>
@@ -14,24 +19,24 @@
         {% csrf_token %}
         <table border="2" align="center" cellpadding="10">
             <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
+                <td>Name<span class="required">*</span></td>
+                <td><input type="text" name="txt_name" id="" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Description</td>
-                <td><input type="text" name="txt_des" id=""></td>
+                <td>Description<span class="required">*</span></td>
+                <td><input type="text" name="txt_des" id="" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Image</td>
-                <td><input type="file" name="txt_pic" id=""></td>
+                <td>Image<span class="required">*</span></td>
+                <td><input type="file" name="txt_pic" id="" required></td>
             </tr>
             <tr>
-                <td>Rate</td>
-                <td><input type="text" name="txt_rate" id=""></td>
+                <td>Rate<span class="required">*</span></td>
+                <td><input type="text" name="txt_rate" id="" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Stock</td>
-                <td><input type="number" name="txt_stock" id=""></td>
+                <td>Stock<span class="required">*</span></td>
+                <td><input type="number" name="txt_stock" id="" required autocomplete="off"></td>
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" name="" id="" value="Save">
@@ -54,7 +59,7 @@
                     <br>
                     <p>{{i.rate}}</p>
                     <br>
-                    <p><a href="{% url 'User:addtocartmaterial' i.id%}">Add to Cart Material</a></p>
+                    <p><a href="{% url 'Seller:deletematerial' i.id %}" class="btn btn-danger">Delete</a></p>
                 </div>
             </td>
             {% if forloop.counter|divisibleby:4 %}
