@@ -7,6 +7,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select,
+        input[type="file"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #0056b3;
+        }
+
+        span.required {
+            color: red;
+        }
+
+        /* Additional Styles for Radio Buttons */
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        /* Additional Styles for File Input */
+        input[type="file"] {
+            border: none;
+            background-color: transparent;
+        }
+    </style>
 </head>
 <body>
     <center><h1>Seller Registration</h1></center>
@@ -14,24 +88,24 @@
         {%csrf_token %}
         <table border="2" align="center" cellpadding="10">
             <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
+                <td>Name <span class="required">*</span></td>
+                <td><input type="text" name="txt_name" id="" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Contact</td>
-                <td><input type="text" name="txt_con" id=""></td>
+                <td>Contact <span class="required">*</span></td>
+                <td><input type="text" name="txt_con" id="" autocomplete="off" required></td>
             </tr>
             <tr>
-                <td>Email</td>
-                <td><input type="text" name="txt_email" id=""></td>
+                <td>Email <span class="required">*</span></td>
+                <td><input type="email" name="txt_email" id="" required></td>
             </tr>
             <tr>
-                <td>Address</td>
-                <td><input type="textarea" name="txt_add" id=""> </td>
+                <td>Address <span class="required">*</span></td>
+                <td><textarea name="txt_add" id="" cols="30" rows="10"></textarea> </td>
             </tr>
             <tr>
-                <td>District</td>
-                <td><select name="select_dis" id="sel_district">
+                <td>District <span class="required">*</span></td>
+                <td><select name="select_dis" id="sel_district" required>
                     <option>--select--</option>
                     {% for i in disdata %}
                     <option value="{{ i.id }}">{{ i.district_name }}</option>
@@ -39,32 +113,33 @@
                     </select></td>
             </tr>
             <tr>
-                <td>Place</td>
-                <td><select name="select_place" id="sel_place">
-                <option>--select--</option>    
+                <td>Place  <span class="required">*</span></td>
+                <td><select name="select_place" id="sel_place" required>
+                <option value="">--select--</option>    
                 </select></td>   
             </tr>
             <tr>
-                <td>Gender</td>
+                <td>Gender <span class="required">*</span></td>
                 <td>
                    <input type="radio" name="btn_gen" id="" value="male">male
                    <input type="radio" name="btn_gen" id="" value="female">female</td>
             </tr>
             <tr>
-                <td>Photo</td>
-                <td><input type="file" name="txt_pic" id=""></td>
+                <td>Photo <span class="required">*</span></td>
+                <td><input type="file" name="txt_pic" id="" required></td>
+            </tr>
+            
+            <tr>
+                <td>Proof <span class="required">*</span></td>
+                <td><input type="file" name="txt_proof" id="" required></td>
             </tr>
             <tr>
-                <td>Password</td>
-                <td><input type="password" name="txt_pass" id=""></td>
+                <td>Password <span class="required">*</span></td>
+                <td><input type="password" name="txt_pass" id="" autocomplete="off" required></td>
             </tr>
             <tr>
-                <td>Confirm Password</td>
-                <td><input type="password" name="txt_conform" id=""></td>
-            </tr>
-            <tr>
-                <td>Proof</td>
-                <td><input type="file" name="txt_proof" id=""></td>
+                <td>Confirm Password <span class="required">*</span></td>
+                <td><input type="password" name="txt_conform" id="" required autocomplete="off"></td>
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" name="" id="" value="Submit">

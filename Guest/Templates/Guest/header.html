@@ -142,7 +142,7 @@
           </button>
           <div class="offcanvas offcanvas-end" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel">
             <div class="offcanvas-header px-4 pb-0">
-              <a class="navbar-brand" href="index.html">
+              <a class="navbar-brand" href="{% url 'Guest:index' %}">
                 <img src="{% static 'Main/images/main-logo.png'%}" class="logo">
               </a>
               <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
@@ -150,7 +150,7 @@
             <div class="offcanvas-body">
               <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
                 <li class="nav-item">
-                  <a class="nav-link me-4 active" href="#billboard">Home</a>
+                  <a class="nav-link me-4 active" href="{% url 'Guest:index' %}">Home</a>
                 </li>
                 <!-- <li class="nav-item">
                   <a class="nav-link me-4" href="#company-services">Services</a>
@@ -199,7 +199,7 @@
                 <li class="nav-item">
                   <div class="user-items ps-5">
                     <ul class="d-flex justify-content-end list-unstyled">
-                      <li class="search-item pe-3">
+                      <!-- <li class="search-item pe-3">
                         <a href="#" class="search-button">
                           <svg class="search">
                             <use xlink:href="#search"></use>
@@ -219,7 +219,7 @@
                             <use xlink:href="#cart"></use>
                           </svg>
                         </a>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </li>
