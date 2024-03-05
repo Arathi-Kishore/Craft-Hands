@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Ready Bootstrap Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+		name='viewport' />
+	<link rel="stylesheet" href="{% static 'Admin/assets/css/bootstrap.min.css'%}">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="{% static 'Admin/assets/css/ready.css'%}">
+	<link rel="stylesheet" href="{% static 'Admin/assets/css/demo.css'%}">
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<div class="logo-header">
+				<a href="index.html" class="logo">
+					Ready Dashboard
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+					data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+			</div>
+			<nav class="navbar navbar-header navbar-expand-lg">
+				<div class="container-fluid">
+
+					<form class="navbar-left navbar-form nav-search mr-md-3" action="">
+						<div class="input-group">
+							<input type="text" placeholder="Search ..." class="form-control">
+							<div class="input-group-append">
+								<span class="input-group-text">
+									<i class="la la-search search-icon"></i>
+								</span>
+							</div>
+						</div>
+					</form>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						
+						
+						
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="sidebar" style="background-color:rgb(16, 6, 53);">
+			<div class="scrollbar-inner sidebar-wrapper">
+				<div class="user">
+					<div class="photo">
+						<img src="{% static 'Admin/assets/img/profile.jpg'%}">
+					</div>
+					<div class="info">
+						<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+							<span>
+								Hizrian
+								<span class="user-level">Administrator</span>
+								<span class="caret"></span>
+							</span>
+						</a>
+						<div class="clearfix"></div>
+
+						
+					</div>
+				</div>
+				<ul class="nav">
+					<li class="nav-item">
+						<a href="{% url 'Admin:Country' %}">
+							<i class="la la-table"></i>
+							<p>Country</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:State' %}">
+							<i class="la la-table"></i>
+							<p>State</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:district' %}">
+							<i class="la la-table"></i>
+							<p>District</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:place' %}">
+							<i class="la la-table"></i>
+							<p>Place</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:ComplaintType' %}">
+							<i class="la la-table"></i>
+							<p>Complaint Type</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:RentType' %}">
+							<i class="la la-table"></i>
+							<p>Rent Type</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:ViewOwnerList' %}">
+							<i class="la la-table"></i>
+							<p>View Owner List</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:AcceptedOwnerList' %}">
+							<i class="la la-table"></i>
+							<p>Accepted Owner List</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:RejectedOwnerList' %}">
+							<i class="la la-table"></i>
+							<p>Rejected Owner List</p>
+
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Admin:Officer' %}">
+							<i class="la la-fonticons"></i>
+							<p>Officer</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{% url 'Guest:index' %}">
+							<i class="la la-fonticons"></i>
+							<p>Logout</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-panel">
+			<div class="content">
+				<div class="container-fluid">
+					<br><br><br><br>
+					{% block content %}
+
+					{% endblock content %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="{% static 'Admin/assets/js/core/jquery.3.2.1.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/core/popper.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/core/bootstrap.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/chartist/chartist.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js'%}"></script>
+	<!-- <script src="{% static 'Admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js'%}"></script> -->
+	<script src="{% static 'Admin/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/jquery-mapael/jquery.mapael.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/jquery-mapael/maps/world_countries.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/chart-circle/circles.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/ready.min.js'%}"></script>
+	<script src="{% static 'Admin/assets/js/demo.js'%}"></script>
