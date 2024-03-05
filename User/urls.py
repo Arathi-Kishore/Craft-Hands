@@ -24,6 +24,8 @@ urlpatterns = [
     path('patmentsucessful/',views.paysucess,name="patmentsucessful"),
     path('Mybookings/',views.mybookings,name="my_bookings"),
     path('deliver/',views.deliver,name="deliver"),
+
+
     path('bill/',views.bill,name="bill"),
         path('AjaxWork/', views.AjaxWork,name="AjaxWork"),
     path('Chat/<int:cid>/', views.chatuser, name="Chat-user"),
@@ -33,6 +35,10 @@ urlpatterns = [
     path('videopay/<int:id>',views.videopay,name="videopay"),
     path('complaint/',views.complaint,name="complaint"),
     path('delcomplaint/<int:did>',views.DeleteComplaint,name="delcomplaint"),
+    path('logout/',views.logout,name="logout"),
+    path('viewtutorials/',views.viewtutorials,name="tutorials"),
+    path('proceedtOPYMENT/<int:vid>',views.proceed,name="proceed"),
+    path('AjxSearch/', views.AjxSearch,name="AjxSearch"),
  
     
 ]

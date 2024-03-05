@@ -164,39 +164,31 @@
                   <a class="nav-link me-4" href="{% url 'Seller:Userbooking' %}">UserBooking</a>
                 </li>
                   <li class="nav-item">
-                    <a class="nav-link me-4" href="{% url 'Seller:AcceptedList' %}">Acceptedlist</a>
+                    <a class="nav-link me-4" href="{% url 'Seller:materialbooking' %}">Material Booking</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link me-4" href="{% url 'Seller:RejectedList' %}">Rejectedlist</a>
-              </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link me-4" href="{% url 'Seller:RejectedList' %}"></a>
+              </li> -->
                 <li class="nav-item dropdown">
-                  <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Pages</a>
+                  <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Reports</a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a href="about.html" class="dropdown-item">About</a>
+                      <a href="{% url 'Seller:weekly' %}" class="dropdown-item">Weekly</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link me-4" href="{% url 'Seller:EditProfile' %}">EditProfile</a>
+                      <a class="nav-link me-4" href="{% url 'Seller:monthly' %}">Monthly</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link me-4" href="{% url 'Seller:ChangePassword' %}">ChangePassword</a>
+                      <a class="nav-link me-4" href="{% url 'Seller:yearly' %}">Yearly</a>
                     </li>
                     <li>
-                      <a href="cart.html" class="dropdown-item">Cart</a>
+                      <a href="{% url 'Seller:videopay' %}" class="dropdown-item">VideoPayment</a>
                     </li>
-                    <li>
-                      <a href="checkout.html" class="dropdown-item">Checkout</a>
-                    </li>
-                    <li>
-                      <a href="single-post.html" class="dropdown-item">Single Post</a>
-                    </li>
-                    <li>
-                      <a href="single-product.html" class="dropdown-item">Single Product</a>
-                    </li>
-                    <li>
-                      <a href="contact.html" class="dropdown-item">Contact</a>
-                    </li>
+                    
                   </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link me-4" href="{% url 'Seller:logout' %}">Logout</a>
                 </li>
                 <li class="nav-item">
                   <div class="user-items ps-5">

@@ -7,6 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        span.required {
+            color: red;
+        }
+    </style>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -17,9 +22,9 @@
             {% csrf_token %}
             <table class="table table-bordered table-striped mt-3">
                 <tr>
-                    <td>WorkType</td>
+                    <td>WorkType <span class="required">*</span></td>
                     <td>
-                        <select class="form-control" name="select_work" id="sel_work">
+                        <select class="form-control" name="select_work" id="sel_work" required>
                             <option value="">--select--</option>
                             {% for i in worktypedata  %}
                             <option value="{{i.id}}" >{{i.worktype}}</option>
@@ -28,24 +33,24 @@
                     </td>   
                 </tr>
                 <tr>
-                    <td>Name</td>
-                    <td><input type="text" class="form-control" name="txt_name" id=""></td>
+                    <td>Name<span class="required">*</span></td>
+                    <td><input type="text" class="form-control" name="txt_name" id="" required autocomplete="off"></td>
                 </tr>
                 <tr>
-                    <td>Rate</td>
-                    <td><input type="text" class="form-control" name="txt_rate" id=""></td>
+                    <td>Rate<span class="required">*</span></td>
+                    <td><input type="text" class="form-control" name="txt_rate" id="" required autocomplete="off"></td>
                 </tr>
                 <tr>
-                    <td>Details</td>
-                    <td><textarea class="form-control" name="txt_det" id="" cols="30" rows="10"></textarea></td>
+                    <td>Details<span class="required">*</span></td>
+                    <td><textarea class="form-control" name="txt_det" id="" cols="30" rows="10" required></textarea></td>
                 </tr>
                 <tr>
-                    <td>Image</td>
-                    <td><input type="file" class="form-control-file" name="txt_pic" id=""></td>
+                    <td>Image<span class="required">*</span></td>
+                    <td><input type="file" class="form-control-file" name="txt_pic" id="" required></td>
                 </tr>
                 <tr>
-                    <td>Videos</td>
-                    <td><input type="file" class="form-control-file" name="txt_vid" id=""></td>
+                    <td>Videos<span class="required">*</span></td>
+                    <td><input type="file" class="form-control-file" name="txt_vid" id="" required></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">

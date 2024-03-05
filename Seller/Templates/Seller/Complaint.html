@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        span.required {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <form method="post" action="">
         {% csrf_token %}
         <table border="2" align="center" cellpadding="10">
             <tr>
-                <td>Title</td>
+                <td>Title<span class="required">*</span></td>
                 <td><input type="text" name="txt_title" id=""></td>
             </tr>
             <tr>
-                <td>Content</td>
+                <td>Content<span class="required">*</span></td>
                 <td><input type="text" name="txt_content" id=""></td>
             </tr>
             <tr>

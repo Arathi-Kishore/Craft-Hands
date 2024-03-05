@@ -7,70 +7,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        table td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select,
+        input[type="file"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #0056b3;
+        }
+
+        span.required {
+            color: red;
+        }
+
+        /* Additional Styles for Radio Buttons */
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        /* Additional Styles for File Input */
+        input[type="file"] {
+            border: none;
+            background-color: transparent;
+        }
+    </style>
 </head>
 <body>
-    <center><h1>User Registration</h1></center>
+    <h1>User Registration</h1>
     <form method="post" action="" id="UserForm" data-places-url="{%url 'Admin:ajaxplace' %}" enctype="multipart/form-data" data-location-url="{% url  'Guest:ajaxloc'%}">
-        {%csrf_token %}
-        <table border="2" align="center" cellpadding="10">
+        {% csrf_token %}
+        <table border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td>Name</td>
-                <td><input type="text" name="txt_name" id=""></td>
+                <td>Name <span class="required">*</span></td>
+                <td><input type="text" name="txt_name" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Contact</td>
-                <td><input type="text" name="txt_con" id=""></td>
+                <td>Contact<span class="required">*</span></td>
+                <td><input type="text" name="txt_con" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Email</td>
-                <td><input type="text" name="txt_email" id=""></td>
+                <td>Email<span class="required">*</span></td>
+                <td><input type="email" name="txt_email" required autocomplete="off"></td>
             </tr>
             <tr>
-                <td>Address</td>
-                <td><input type="textarea" name="txt_add" id=""> </td>
+                <td>Address<span class="required">*</span></td>
+                <td><textarea name="txt_add" cols="30" rows="10" required></textarea></td>
             </tr>
             <tr>
-                <td>District</td>
-                <td><select name="select_dis" id="sel_district">
-                    <option>--select--</option>
-                    {% for i in disdata %}
-                    <option value="{{ i.id }}">{{ i.district_name }}</option>
-                    {% endfor %}
-                    </select></td>
-            </tr>
-            <tr>
-                <td>Place</td>
-                <td><select name="select_place" id="sel_place">
-                <option>--select--</option>    
-                </select></td>   
-            </tr>
-            <tr>
-                <td> Location</td>
-                <td><select name="select_location" id="sel_location">
-                    <option>--select--</option>    
-                    </select></td>
-            </tr>
-            <tr>
-                <td>Gender</td>
+                <td>District<span class="required">*</span></td>
                 <td>
-                   <input type="radio" name="btn_gen" id="" value="male">male
-                   <input type="radio" name="btn_gen" id="" value="female">female</td>
+                    <select name="select_dis" id="sel_district" required>
+                        <option value="">--select--</option>
+                        {% for i in disdata %}
+                            <option value="{{ i.id }}">{{ i.district_name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td>Photo</td>
-                <td><input type="file" name="txt_pic" id=""></td>
+                <td>Place<span class="required">*</span></td>
+                <td>
+                    <select name="select_place" id="sel_place" required>
+                        <option value="">--select--</option>    
+                    </select>
+                </td>   
             </tr>
             <tr>
-                <td>Password</td>
-                <td><input type="password" name="txt_pass" id=""></td>
+                <td> Location<span class="required">*</span></td>
+                <td>
+                    <select name="select_location" id="sel_location" required >
+                        <option value="">--select--</option>    
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td>Confirm Password</td>
-                <td><input type="password" name="txt_conform" id=""></td>
+                <td>Gender<span class="required">*</span></td>
+                <td>
+                    <input type="radio" name="btn_gen" value="male">male
+                    <input type="radio" name="btn_gen" value="female">female
+                </td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" name="" id="" value="Submit">
-                <input type="reset" name=""  id="" value="Cancel"></td>  
+                <td>Photo<span class="required">*</span></td>
+                <td><input type="file" name="txt_pic" required></td>
+            </tr>
+            <tr>
+                <td>Password<span class="required">*</span></td>
+                <td><input type="password" name="txt_pass" required autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td>Confirm Password<span class="required">*</span></td>
+                <td><input type="password" name="txt_conform" required autocomplete="off"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit"><input type="reset" value="Cancel"></td>  
             </tr>
         </table>
     </form>

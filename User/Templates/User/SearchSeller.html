@@ -26,7 +26,7 @@
 <body>
     <div class="container">
         <h1 class="text-center">Search Seller</h1>
-        <form action="" method="POST" id="Searchseller" data-places-url="{% url 'Admin:ajaxplace' %}" enctype="multipart/form-data">
+        <form action="" method="POST" id="Searchseller" data-places-url="{% url 'Admin:ajaxplace' %}" enctype="multipart/form-data" data-seller-url="{% url 'User:AjxSearch' %}">
             {% csrf_token %}
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -48,7 +48,7 @@
                 </div>
             </div>
         </form>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center"  id="results">
             {% for seller in rdata %}
                 <div class="col-md-3">
                     <div class="seller-card">
@@ -74,16 +74,38 @@
         $(document).ready(function() {
             $("#sel_district").change(function() {
                 var did = $(this).val();
+                var pid=document.getElementById("sel_place").value;
                 var url = $("#Searchseller").data("places-url");
                 $.ajax({
                     url: url,
                     data: { Dist: did },
                     success: function(data) {
                         $("#sel_place").html(data);
+                        var url = $("#Searchseller").data("data-seller-url");
+                $.ajax({
+                    url: url,
+                    data: { did: did,pid:pid },
+                    success: function(data) {
+                        $("#results").html(data);
+                    },
+                });
                     },
                 });
             });
         });
+        $("#sel_place").change(function() {
+                var pid = $(this).val();
+                var did=document.getElementById("sel_district").value;
+                var url = $("#Searchseller").data("data-seller-url");
+                $.ajax({
+                    url: url,
+                    data: { did: did,pid:pid },
+                    success: function(data) {
+                        $("#results").html(data);
+                    },
+                });
+            });
+        
     </script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+<div class="row justify-content-center"  id="results">
+    {% for seller in rdata %}
+        <div class="col-md-3">
+            <div class="seller-card">
+                <img src="{{ seller.photo.url }}" alt="Seller Photo">
+                <p>{{ seller.name }}</p>
+                <p>{{ seller.contact }}</p>
+                <p>{{ seller.email }}</p>
+                <p><a href="{% url 'User:ViewWorks' seller.id %}" class="btn btn-primary">View Works</a></p>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 %}
+            </div><div class="row justify-content-center">
+        {% endif %}
+    {% endfor %}
+</div>

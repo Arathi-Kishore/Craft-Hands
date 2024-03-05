@@ -1,0 +1,56 @@
+{% extends 'Seller/header.html' %}
+{% load static %}
+{% block content %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form action="" method="post">
+        <center><h1>Yearly Booking Report</h1></center>
+        <!-- {% csrf_token %} -->
+    {% if data1 %}
+    <table border="1" align="center" cellpadding="10">
+        <tr>
+            <th>Sl.No</th>
+            <th>Product</th>
+            <th>Details</th>
+            <th>Rate</th>
+            <th>Quantity</th>
+            <th>Photo</th>
+            <th>User</th>
+            <th>Contact Info</th>
+            <th>Email</th>
+            <th>Total</th>
+        </tr>
+
+        {% for i in data1 %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.works.name}}</td>
+            <td>{{i.works.details}}</td>
+            <td>{{i.works.rate}}</td>
+            <td>{{i.qty}}</td>
+            <td><img src="{{i.works.image.url}}" alt="" width="150" height="150"></td>
+            <td>{{i.booking.user.name}}</td>
+            <td>{{i.booking.user.contact}}</td>
+            <td>{{i.booking.user.email}}</td>
+            <td class="text-right">{{ i.qty|mul:i.works.rate }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="10" align="right">Grand Total:{{total}}</td>
+        </tr>
+    </table>
+   
+    {% endif %}
+    </form> 
+    </div>
+</body>
+</html>
+{% endblock content %}
