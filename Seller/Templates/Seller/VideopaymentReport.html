@@ -1,0 +1,34 @@
+{% extends 'Seller/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        <table border="1" align="center" cellpadding="10">
+          <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Photo</th>
+          </tr>
+          {% for i in data %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user.name}}</td>
+            <td>{{i.user.contact}}</td>
+            <td>{{i.user.email}}</td>
+            <td><img src="{{i.user.photo.url}}" alt="" width="150" height="150"></td>
+          </tr>
+          {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

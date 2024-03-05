@@ -575,10 +575,110 @@ def DeleteComplaint(request,did):
 
 
     
-    
+def logout(request):
+    del request.session["uid"]
+    return redirect("Guest:login") 
+
+
+def proceed(request,vid):
+    if 'uid' in request.session:
+
+        request.session["vid"]=vid
+        if request.method=="POST":
+            return redirect("User:videopay")
+        else:
+            workdata=tbl_works.objects.get(id=vid)
+            userdata=tbl_user.objects.get(id=request.session["uid"])
+            sellerid=workdata.seller.id
+            sellerdata=tbl_seller.objects.get(id=sellerid)
+            vcount=tbl_videopay.objects.filter(seller=sellerdata,user=userdata).count()
+            if vcount>0:
+                return redirect("User:tutorials")
+            else:
+                return render(request,"User/PaymentProceeed.html")
+    else:
+        return redirect("Guest:login")   
 
    
 
 
 
 
+
+def cancelbooking(request,bid):
+    data=tbl_wcart.objects.get(id=bid)
+    data.cstatus=2
+    data.save()
+    return redirect("User:my_bookings")
+def cancelmbooking(request,mid):
+    bdata=tbl_mcart.objects.get(id=mid)
+    bdata.cstatus=7
+    bdata.save()
+    pdata=tbl_material.objects.get(id=bdata.material.id)
+    stock=int(pdata.stock)
+    newstock=stock+int(bdata.qty)
+    pdata.stock=newstock
+    pdata.save()
+    return redirect("User:my_bookings")
+    
+
+def returnreason(request,rid):
+    if 'uid' in request.session:
+        userdata=tbl_user.objects.get(id=request.session["uid"])
+        mdata=tbl_mcart.objects.get(id=rid)
+        name=userdata.name
+        email=userdata.email
+        if request.method == "POST":
+            tbl_return.objects.create(cart=mdata,
+            reason=request.POST.get('txtreason'))
+            mdata.cstatus=6
+            mdata.save()
+           
+            mtdata=tbl_material.objects.get(id=mdata.material.id)
+            stock=int(mtdata.stock)
+            newstock=stock+int(mdata.qty)
+            mtdata.stock=newstock
+            mtdata.save()
+            
+            
+            return redirect("User:my_bookings")
+        else:
+            return render(request,"User/ReturnReason.html")
+    else:
+        return redirect("Guest:login")
+
+def wreturnreason(request,wid):
+    if 'uid' in request.session:
+        userdata=tbl_user.objects.get(id=request.session["uid"])
+        mdata=tbl_wcart.objects.get(id=wid)
+        data=tbl_wbooking.objects.get(id=mdata.booking.id)
+        name=userdata.name
+        email=userdata.email
+        if request.method == "POST":
+            tbl_return.objects.create(wcart=mdata,
+            reason=request.POST.get('txtreason'))
+            mdata.cstatus=9
+            mdata.save()
+                   
+            
+            return redirect("User:my_bookings")
+        else:
+            return render(request,"User/ReturnReason.html")
+    else:
+        return redirect("Guest:login")
+
+def removemybooking1(request,did):
+    tbl_mcart.objects.get(id=did).delete()
+    return redirect('User:my_bookings')
+def removemybooking(request,did):
+    tbl_wcart.objects.get(id=did).delete()
+    return redirect('User:my_bookings')
+
+
+def viewtutorials(request):
+    if 'uid' in request.session:
+
+        workdata=tbl_works.objects.get(id=request.session["vid"])
+        return render(request,"User/Tutorials.html",{'data':workdata})
+    else:
+        return redirect("Guest:login")

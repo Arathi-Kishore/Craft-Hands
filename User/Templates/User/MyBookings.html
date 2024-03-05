@@ -41,13 +41,13 @@
                         <p>Order is not completed</p>
                         {% elif i.booking.status == 1 and i.cstatus == 0 %}
                         <p>Paid | <a href="{% url 'User:cancelbooking' i.id %}">Cancel</a>|
-                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a> -->
+                            <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a>
                         </p>
                         {% elif i.cstatus == 2 %}
                         <p>Cancelled</p>
                         {% elif i.cstatus == 3 %}
                         <p>Accepted |<a href="{% url 'User:cancelbooking' i.id %}">Cancel</a>|
-                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a>-->
+                            <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a>
                         </p>
                         {% elif i.cstatus == 4 %}
                         <p>Rejected</p>

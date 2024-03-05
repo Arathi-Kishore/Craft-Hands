@@ -62,3 +62,7 @@ class tbl_complaint(models.Model):
 
 
 
+class tbl_return(models.Model):
+    cart=models.ForeignKey(tbl_mcart,on_delete=models.SET_NULL,null=True)
+    reason=models.CharField(max_length=100)
+    wcart=models.ForeignKey(tbl_wcart,on_delete=models.SET_NULL,null=True)

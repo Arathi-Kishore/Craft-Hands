@@ -1,0 +1,31 @@
+{% extends 'Seller/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form action="" method="post">
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <th>Reason</th>
+            </tr>
+            
+            <tr>
+                <td>{{data.reason}}</td>
+            </tr>
+            
+        </table>
+        <p align="center">{% if ms %}<a href="{% url 'Seller:wverifyreason' data.id %}">Verify</a>
+            {% else %}
+            <a href="{% url 'Seller:verifyreason' data.id %}">Verify</a>{% endif %}</p>
+    </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,82 @@
+{% extends 'Seller/header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form method="post">
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>User</th>
+                <th>Contact Info</th>
+                <th>Email</th>
+                <th>Material</th>
+                <th>Rate</th>
+                <th>Photo</th>
+                
+                <th>Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.mbooking.user.name}}</td>
+                <td>{{i.mbooking.user.contact}}</td>
+                <td>{{i.mbooking.user.email}}</td>
+                <td>{{i.material.name}}</td>
+                <td>{{i.material.rate}}</td>
+                <td><img src="{{i.material.image.url}}" alt="" width="150" height="150"></td>
+               
+
+                <!-- Me-->
+                <td>
+
+                    {% if i.mbooking.status == 0  and i.cstatus == 0 %}
+                        <p>Order is not completed</p>
+                        {% elif i.mbooking.status == 1 and i.cstatus == 0 %}
+                        <p>Paid  <a href="{% url 'Seller:acceptorder' i.id %}">Order Confirm</a> | <a href="{% url 'Seller:rejectorder' i.id %}">Order Rejected</a>|
+                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a> -->
+                        </p>
+                        {% elif i.cstatus == 1 %}
+                        <p>Order Accepted| <a href="{% url 'Seller:mitempacked' i.id %}">Item Packed</a>
+                            <!-- <a href="{% url 'User:Chat-user' i.id %}">Chat Now</a> -->
+                        </p>
+                        {% elif i.cstatus == 2 %}
+                        <p>Item Packed| <a href="{% url 'Seller:mitemshipped' i.id %}">Item Shipped</a>
+                            </p>
+                        {% elif  i.cstatus == 3 %}
+                        <p>Item Shipped| <a href="{% url 'Seller:mitemdispatched' i.id %}">Item Dispatched</a></p>
+                        {% elif i.cstatus == 4 %}
+                        <p>Item Dispatched | <a href="{% url 'Seller:mdelivered' i.id %}">Item Delivered</a></p>
+                        {% elif  i.cstatus == 5 %}
+                        <p>Item Delivered</p>
+                        {% elif  i.cstatus == 6 %}
+                        <p>Item Returned |<a href="{% url 'Seller:viewreason' i.id %}">View Reason</a></p>
+                        {% elif  i.cstatus == 7 %}
+                        <p>Item Cancelled</p>
+                        {% elif  i.cstatus == 8 %}
+                        <p>Return Verified</p>
+                        {% elif  i.cstatus == 9 %}
+                        <p>Order Rejected</p>
+                        {% else %}
+                        <p>Pending</p>
+                        {% endif %}
+                        <p><a href="{% url 'User:Chat-user' i.id %}">Chat Now</a></p>
+
+                </td>
+                <!--Endme -->
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

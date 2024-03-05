@@ -1,63 +1,77 @@
 {% extends 'Seller/header.html' %}
 {% load static %}
 {% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Booking</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
 </head>
 <body>
-    <div class="container">
-        <div class="text-center mt-4">
-            <h1>User Booking</h1>
-        </div>
-        <form action="" method="post" id="" enctype="multipart/form-data" class="mt-4">
-            {% csrf_token %}
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Sl.no</th>
-                            <th>Work</th>
-                            <th>Image</th>
-                            <th>Rate</th>
-                            <th>Quantity</th>
-                            <th>Name of order</th>
-                            <th>Address</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for i in data %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ i.works.name }}</td>
-                            <td><img src="{{ i.works.image.url }}" alt="Image" class="img-fluid" style="max-width: 100px;"></td>
-                            <td>{{ i.works.rate }}</td>
-                            <td>{{ i.qty }}</td>
-                            <td>{{ i.wbooking.user.name }}</td>
-                            <td>{{ i.wbooking.user.address }}</td>
-                            <td>
-                                <a href="{% url 'Seller:acceptlist' i.wbooking.id %}" class="btn btn-success btn-sm">Accept</a>
-                                <a href="{% url 'Seller:rejectlist' i.wbooking.id %}" class="btn btn-danger btn-sm">Reject</a>
-                                <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </form>
-    </div>
+    <div id="tab">
+    <form method="post">
+        <table align="center" border="1" cellpadding="10">
+            <tr>
+                <th>Sl.No</th>
+                <th>Product</th>
+                <th>Details</th>
+                <th>Rate</th>
+                <th>Photo</th>
+                <th>User</th>
+                <th>Contact Info</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.works.name}}</td>
+                <td>{{i.works.details}}</td>
+                <td>{{i.works.rate}}</td>
+                <td><img src="{{i.works.image.url}}" alt="" width="150" height="150"></td>
+                <td>{{i.booking.user.name}}</td>
+                <td>{{i.booking.user.contact}}</td>
+                <td>{{i.booking.user.email}}</td>
 
-    <!-- Bootstrap JS and dependencies (optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                
+                <td>
+                    {% if i.booking.status == 0 and i.cstatus == 0 %}
+                    <p>Order is not completed</p>
+                    {% elif i.booking.status == 1 and i.cstatus == 0 %}
+                    <p>
+                    <a href="{% url 'Seller:acceptwork' i.id %}">Order Confirm</a> | <a href="{% url 'Seller:rejectwork' i.id %}">Order Rejected</a>
+                   | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>  
+                </p>
+                {% elif i.cstatus == 2 and i.cstatus == 1 %}
+                <p>Order Cancelled</p>
+                {% elif i.cstatus == 3  %}
+                <p>Order Confirmed | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a> | <a href="{% url 'Seller:itempacked' i.id %}">Item Packed</a><!-- link to item packed and update status to 5 -->  </p>
+                {% elif i.cstatus == 4  %}
+                <p>Order Rejected</p> 
+                {% elif i.cstatus == 5 %}
+                <p>Order Packed | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>| <a href="{% url 'Seller:itemshipped' i.id %}">Item Shipped</a><!-- link to item shipped and update status to 6 --> </p>
+                {% elif i.cstatus == 6 %}
+                <p>Order Shipped | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>| <a href="{% url 'Seller:itemdispatched' i.id %}">Item Dispatched</a><!-- link to item  Dispacatched  and update status to 7 --> </p>
+                {% elif i.cstatus == 7 %}
+                <p>Hands on Delvery Agent | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a> | <a href="{% url 'Seller:delivered' i.id %}">Item Delivered</a><!-- link to item Delivered and update status to 8 --> </p>
+                {% elif i.cstatus == 8 %}
+                <p>Order Delivered | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a></p>
+                {% elif  i.cstatus == 9 %}
+                <p>Product Returned |<a href="{% url 'Seller:wviewreason' i.id %}">View Reason</a></p>
+                {% elif i.cstatus == 10 %}
+                <p>Return Verified|<a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a> </p>
+                {% else %}
+                <p>Order Cancelled |<a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>  </p>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </div>
 </body>
 </html>
 {% endblock content %}

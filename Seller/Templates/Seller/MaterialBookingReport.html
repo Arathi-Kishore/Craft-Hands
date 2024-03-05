@@ -1,0 +1,58 @@
+{% extends 'Seller/header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+    <form action="" method="post">
+        {% csrf_token %}
+    <table align="center" border="1" cellpadding="10" style="border-collapse: collapse;">
+        <center><h1>Material Booking Report</h1></center>
+        <tr>
+            <td>From Date</td>
+            <td><input type="date" name="fdate" id=""></td>
+            <td>To Date</td>
+            <td><input type="date" name="edate" id=""></td>
+        </tr>
+        <tr>
+            <td colspan="4" align="center"><input type="submit" value="Show Result" name="result"></td>
+        </tr>
+    </table>
+    {% if data %}
+    <table border="1" align="center" cellpadding="10"> 
+        <tr>
+            <th>Sl.No</th>
+            <th>Material</th>
+            <th>Rate</th>
+            <th>Photo</th>
+            <th>User</th>
+            <th>Contact Info</th>
+            <th>Email</th>
+            <!-- <th>Action</th> -->
+        </tr>
+
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.material.name}}</td>
+            <!-- <td>{{i.material.details}}</td> -->
+            <td>{{i.material.rate}}</td>
+            <td><img src="{{i.material.image.url}}" alt="" width="150" height="150"></td>
+            <td>{{i.mbooking.user.name}}</td>
+            <td>{{i.mbooking.user.contact}}</td>
+            <td>{{i.mbooking.user.email}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    </form>
+    </div>
+</body>
+</html>
+{% endblock content %}

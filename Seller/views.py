@@ -84,32 +84,32 @@ def DeleteWork(request,did):
     tbl_work.objects.get(id=did).delete()
     return redirect("Seller:AddWork") 
 
-def userbooking(request):
-    userdata=tbl_seller.objects.get(id=request.session['sid'])
-    data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=0)
-    return render(request,"Seller/UserBooking.html",{'data':data})
+# def userbooking(request):
+#     userdata=tbl_seller.objects.get(id=request.session['sid'])
+#     data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=0)
+#     return render(request,"Seller/UserBooking.html",{'data':data})
 
-def acceptlist(request):
-    userdata=tbl_seller.objects.get(id=request.session['sid'])
-    data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=1)
-    return render(request,"Seller/AcceptedList.html",{'selldata':data})
+# def acceptlist(request):
+#     userdata=tbl_seller.objects.get(id=request.session['sid'])
+#     data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=1)
+#     return render(request,"Seller/AcceptedList.html",{'selldata':data})
 
-def rejectlist(request):
-    userdata=tbl_seller.objects.get(id=request.session['sid'])
-    data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=2)
-    return render(request,"Seller/RejectedList.html",{'selldata':data})
+# def rejectlist(request):
+#     userdata=tbl_seller.objects.get(id=request.session['sid'])
+#     data=tbl_wcart.objects.filter(works__seller=userdata,wbooking__status=2)
+#     return render(request,"Seller/RejectedList.html",{'selldata':data})
 
-def accept(request,aid):
-    sellerdata=tbl_wbooking.objects.get(id=aid)
-    sellerdata.status=1
-    sellerdata.save()
-    return redirect("Seller:Userbooking")
+# def accept(request,aid):
+#     sellerdata=tbl_wbooking.objects.get(id=aid)
+#     sellerdata.status=1
+#     sellerdata.save()
+#     return redirect("Seller:Userbooking")
 
-def reject(request,rid):
-    sellerdata=tbl_wbooking.objects.get(id=rid)
-    sellerdata.status=2
-    sellerdata.save()
-    return redirect("Seller:Userbooking")    
+# def reject(request,rid):
+#     sellerdata=tbl_wbooking.objects.get(id=rid)
+#     sellerdata.status=2
+#     sellerdata.save()
+#     return redirect("Seller:Userbooking")    
 
 def chatuser(request, cid):
     chatobj = tbl_wbooking.objects.get(id=cid)
@@ -180,3 +180,231 @@ def logout(request):
     
 
 
+def itempacked(request,pid):
+    data=tbl_wcart.objects.get(id=pid)
+    data.cstatus=5
+    data.save()
+    return redirect("Seller:Userbooking")
+def itemshipped(request,shid):
+    data=tbl_wcart.objects.get(id=shid)
+    data.cstatus=6
+    data.save()
+    return redirect("Seller:Userbooking")
+def itemdispatched(request,did):
+    data=tbl_wcart.objects.get(id=did)
+    data.cstatus=7
+    data.save()
+    return redirect("Seller:Userbooking")
+def delivered(request,ddid):
+    data=tbl_wcart.objects.get(id=ddid)
+    data.cstatus=8
+    data.save()
+    return redirect("Seller:Userbooking")
+# material
+def mitempacked(request,pid):
+    data=tbl_mcart.objects.get(id=pid)
+    data.cstatus=2
+    data.save()
+    return redirect("Seller:materialbooking")
+def mitemshipped(request,shid):
+    data=tbl_mcart.objects.get(id=shid)
+    data.cstatus=3
+    data.save()
+    return redirect("Seller:materialbooking")
+def mitemdispatched(request,did):
+    data=tbl_mcart.objects.get(id=did)
+    data.cstatus=4
+    data.save()
+    return redirect("Seller:materialbooking")
+def mdelivered(request,ddid):
+    data=tbl_mcart.objects.get(id=ddid)
+    data.cstatus=5
+    data.save()
+    return redirect("Seller:materialbooking")
+
+def workreport(request):
+    if 'sid' in request.session:
+        total=0
+        slr=tbl_seller.objects.get(id=request.session["sid"])
+    # mdata=tbl_wcart.objects.filter(works__seller=slr)
+        if request.method == "POST":
+            if request.POST.get('fdate')!="" and request.POST.get('edate')!="":
+                data1=tbl_wcart.objects.filter(wbooking__date__gt=request.POST.get('fdate'),wbooking__date__lt=request.POST.get('edate'),works__seller=slr)
+                for i in data1:
+                    total=total+(int(i.qty)*int(i.works.rate))
+                return render(request,"Seller/WorkBookingReport.html",{'data1':data1,'total':total})
+            elif request.POST.get('fdate')!="" and request.POST.get('edate') =="":
+                data2=tbl_wcart.objects.filter(wbooking__date__gt=request.POST.get('fdate'),works__seller=slr)
+                for i in data2:
+                    total=total+(int(i.qty)*int(i.works.rate))
+                return render(request,"Seller/WorkBookingReport.html",{'data1':data2,'total':total})
+            elif request.POST.get('fdate') =="" and request.POST.get('edate')!="":
+                data3=tbl_wcart.objects.filter(wbooking__date__lt=request.POST.get('edate'),works__seller=slr)
+                for i in data3:
+                    total=total+(int(i.qty)*int(i.works.rate))
+                return render(request,"Seller/WorkBookingReport.html",{'data1':data3,'total':total})
+            else:
+                return render(request,"Seller/WorkBookingReport.html")
+        else:
+                return render(request,"Seller/WorkBookingReport.html")
+    else:
+        return redirect("Guest:login")
+
+def materialreport(request):
+    if 'sid' in request.session:
+        slr=tbl_seller.objects.get(id=request.session["sid"])
+        #mdata=tbl_mcart.objects.filter(material__work__seller=slr)
+        if request.method == "POST":
+            if request.POST.get('fdate')!="" and request.POST.get('edate')!="":
+                data1=tbl_mcart.objects.filter(mbooking__date__gt=request.POST.get('fdate'),mbooking__date__lt=request.POST.get('edate'),material__work__seller=slr)
+                return render(request,"Seller/MaterialBookingReport.html",{'data':data1})
+            elif request.POST.get('fdate')!="" and request.POST.get('edate') =="":
+                data2=tbl_mcart.objects.filter(mbooking__date__gt=request.POST.get('fdate'),material__work__seller=slr)
+                return render(request,"Seller/MaterialBookingReport.html",{'data':data2})
+            elif request.POST.get('fdate') =="" and request.POST.get('edate')!="":
+                data3=tbl_mcart.objects.filter(mbooking__date__lt=request.POST.get('edate'),material__work__seller=slr)
+                return render(request,"Seller/MaterialBookingReport.html",{'data':data3})
+            else:
+                return render(request,"Seller/MaterialBookingReport.html")
+        else:
+            return render(request,"Seller/MaterialBookingReport.html")
+    else:
+        return redirect("Guest:login")
+
+def viewreason(request,mid):
+    data=tbl_mcart.objects.get(id=mid)
+    rdata=tbl_return.objects.get(cart=data)
+    return render(request,"Seller/ViewReason.html",{'data':rdata})
+def verifyreason(request,rid):
+    data=tbl_return.objects.get(id=rid)
+    ddata=tbl_mcart.objects.get(id=data.cart.id)
+    ddata.cstatus=8
+    ddata.save()
+    return redirect("Seller:Userbooking")
+    #product return reason
+def wviewreason(request,wid):
+    data=tbl_wcart.objects.get(id=wid)
+    rdata=tbl_return.objects.get(wcart=data)
+    return render(request,"Seller/ViewReason.html",{'data':rdata,'ms':1})
+def wverifyreason(request,pid):
+    data=tbl_return.objects.get(id=pid)
+    ddata=tbl_wcart.objects.get(id=data.wcart.id)
+    
+    ddata.cstatus=10
+    ddata.save()
+    return redirect("Seller:Userbooking")
+
+
+def userbooking(request):
+
+    if 'sid' in request.session:
+        slr=tbl_seller.objects.get(id=request.session["sid"])
+        data=tbl_wcart.objects.filter(works__seller=slr)
+        return render(request,"Seller/Userbooking.html",{'data':data})
+    else:
+       return redirect("Guest:login")
+
+def materialbooking(request):
+
+    if 'sid' in request.session:
+        slr=tbl_seller.objects.get(id=request.session["sid"])
+        mdata=tbl_mcart.objects.filter(material__work__seller=slr)
+        return render(request,"Seller/Materialbooking.html",{'data':mdata})
+    else:
+       return redirect("Guest:login")
+
+
+
+def rejectorder(request,rid):
+    data=tbl_mcart.objects.get(id=rid)
+    bid=data.mbooking.id
+    mbdata=tbl_mbooking.objects.get(id=bid)
+    name=mbdata.user.name
+    email=mbdata.user.email
+    data.cstatus=9
+    data.save()
+    return redirect("Seller:Userbooking")
+
+def rejectwork(request,rrid):
+    
+    data=tbl_wcart.objects.get(id=rrid)
+    bdata=tbl_wbooking.objects.get(id=data.booking.id)
+    name=bdata.user.name
+    email=bdata.user.email
+    data.cstatus=4
+    data.save()
+    return redirect("Seller:Userbooking")
+    
+
+
+
+def acceptorder(request,aid):
+    data=tbl_mcart.objects.get(id=aid)
+    bid=data.mbooking.id
+    mbdata=tbl_mbooking.objects.get(id=bid)
+    name=mbdata.user.name
+    email=mbdata.user.email  
+    data.cstatus=1
+    data.save()
+    return redirect("Seller:Userbooking")
+   
+
+def acceptwork(request,aaid):
+    wdata=tbl_wcart.objects.get(id=aaid)
+    bdata=tbl_wbooking.objects.get(id=wdata.wbooking.id)
+    name=bdata.user.name
+    email=bdata.user.email    
+    wdata.cstatus=3
+    wdata.save()
+    return redirect("Seller:Userbooking")
+
+
+def videoreport(request):
+    sellerdata=tbl_seller.objects.get(id=request.session["sid"])
+    data=tbl_videopay.objects.filter(seller=sellerdata)
+    return render(request,"Seller/VideopaymentReport.html",{'data':data})
+
+def weekly_booking_report(request):    # Get the current date
+    current_date = datetime.now()    # Calculate the start date of the week (Sunday) and the end date of the week (Saturday)    
+    slr=tbl_seller.objects.get(id=request.session["sid"])
+    total=0
+    start_of_week = current_date - timedelta(days=current_date.weekday())
+    end_of_week = start_of_week + timedelta(days=6)    # Query the database for bookings within the current week   
+    data1=tbl_wcart.objects.filter(booking__date__gt=start_of_week,booking__date__lt=end_of_week,works__seller=slr)
+    for i in data1:
+        total=total+(int(i.qty)*int(i.works.rate))
+    return render(request,"Seller/WeeklyReport.html",{'data1':data1,'total':total})
+   
+
+def monthly_booking_report(request):    # Get the current date
+    current_date = datetime.now()
+    slr=tbl_seller.objects.get(id=request.session["sid"])
+    total=0
+    # Calculate the first day and the last day of the current month  
+    first_day_of_month = current_date.replace(day=1)
+    last_day_of_month = first_day_of_month.replace(month=first_day_of_month.month + 1, day=1) - timedelta(days=1)
+    # Query the database for bookings within the current month 
+    # monthly_bookings = Booking.objects.filter(booking_date__range=[first_day_of_month, last_day_of_month])
+    # Calculate the count of bookings for each day in the month
+    data1=tbl_wcart.objects.filter(booking__date__gt=first_day_of_month,booking__date__lt=last_day_of_month,works__seller=slr)
+    for i in data1:
+        total=total+(int(i.qty)*int(i.works.rate))
+    return render(request,"Seller/MonthlyReport.html",{'data1':data1,'total':total}) 
+    
+
+
+def yearly_booking_report(request):    # Get the current date
+    current_date = datetime.now()
+    slr=tbl_seller.objects.get(id=request.session["sid"])
+    total=0
+    # Calculate the first day and the last day of the current year    
+    first_day_of_year = current_date.replace(month=1, day=1)
+    last_day_of_year = first_day_of_year.replace(year=first_day_of_year.year + 1) - timedelta(days=1)
+    # Query the database for bookings within the current year  
+    # yearly_bookings = Booking.objects.filter(booking_date__range=[first_day_of_year, last_day_of_year])
+    # Calculate the count of bookings for each day in the year
+    # daily_booking_count = yearly_bookings.annotate(date=models.functions.TruncDay('booking_date')).values('date').annotate(count=Count('id')).order_by('date')
+    data1=tbl_wcart.objects.filter(booking__date__gt=first_day_of_year,booking__date__lt=last_day_of_year,works__seller=slr)
+    for i in data1:
+        total=total+(int(i.qty)*int(i.works.rate))
+    return render(request,"Seller/YearlyReport.html",{'data1':data1,'total':total}) 
