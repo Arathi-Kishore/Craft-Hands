@@ -38,6 +38,7 @@ urlpatterns = [
     path('logout/',views.logout,name="logout"),
     path('viewtutorials/',views.viewtutorials,name="tutorials"),
     path('proceedtOPYMENT/<int:vid>',views.proceed,name="proceed"),
+    path('AjxSearch/', views.AjxSearch,name="AjxSearch"),
  
     
 ]

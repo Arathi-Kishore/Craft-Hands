@@ -682,3 +682,15 @@ def viewtutorials(request):
         return render(request,"User/Tutorials.html",{'data':workdata})
     else:
         return redirect("Guest:login")
+
+def AjxSearch(request):
+    
+        if request.GET.get('pid')!="":
+            placedata=tbl_place.objects.get(id=request.GET.get('pid'))
+            sellerdata=tbl_seller.objects.filter(place=placedata)
+            return render(request,"User/AjaxSearch.html",{'rdata':sellerdata})
+        else:
+            districtdata=tbl_district.objects.get(id=request.GET.get('did'))
+            sellerdata=tbl_seller.objects.filter(place__district=districtdata)
+            return render(request,"User/AjaxSearch.html",{'rdata':sellerdata})
+   
