@@ -334,6 +334,7 @@ def PAYMENT(request):
                     ids=tbl_wbooking.objects.get(id=request.session["bookings"])
                     ids.status=1
                     ids.save()
+                    return redirect("User:processingpayment")
                 if request.session["mbookings"]!="":
                     mdata=tbl_mbooking.objects.get(id=request.session["mbookings"])
                     mcartdatacount=tbl_mcart.objects.filter(mbooking=mdata).count()
@@ -345,6 +346,7 @@ def PAYMENT(request):
                             newstock=stock-int(i.qty)
                             mtdata.stock=newstock
                             mtdata.save()
+                            return redirect("User:processingpayment")
                             if newstock == 0:
                                 usr=tbl_user.objects.get(id=request.session['uid'])
                                 data=tbl_mcart.objects.filter(mbooking__status=0,material=mtdata).exclude(mbooking__user=usr)
@@ -380,9 +382,11 @@ def PAYMENT(request):
                                 tbl_mcart.objects.get(id=i.id).delete()
                             mdata.status=1
                             mdata.save()
+                            return redirect("User:processingpayment")
                         else:
                             mdata.status=1
                             mdata.save()
+                            return redirect("User:processingpayment")
                     return redirect("User:processingpayment")
                 else:
                     return render(request,"User/Payment.html")
@@ -562,7 +566,6 @@ def complaint(request):
             title = request.POST.get("txt_title"),
             content = request.POST.get("txt_content"),
             user=udata,
-
         )
         return render(request,"User/Complaint.html",{'udata':udata,'compdata':compdata}) 
     else:

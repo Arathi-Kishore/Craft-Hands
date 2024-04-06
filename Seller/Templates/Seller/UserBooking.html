@@ -43,28 +43,28 @@
                     {% elif i.booking.status == 1 and i.cstatus == 0 %}
                     <p>
                     <a href="{% url 'Seller:acceptwork' i.id %}">Order Confirm</a> | <a href="{% url 'Seller:rejectwork' i.id %}">Order Rejected</a>
-                   | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>  
+                   | <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a>  
                 </p>
                 {% elif i.cstatus == 2 and i.cstatus == 1 %}
                 <p>Order Cancelled</p>
                 {% elif i.cstatus == 3  %}
-                <p>Order Confirmed | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a> | <a href="{% url 'Seller:itempacked' i.id %}">Item Packed</a><!-- link to item packed and update status to 5 -->  </p>
+                <p>Order Confirmed | <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a> | <a href="{% url 'Seller:itempacked' i.id %}">Item Packed</a><!-- link to item packed and update status to 5 -->  </p>
                 {% elif i.cstatus == 4  %}
                 <p>Order Rejected</p> 
                 {% elif i.cstatus == 5 %}
-                <p>Order Packed | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>| <a href="{% url 'Seller:itemshipped' i.id %}">Item Shipped</a><!-- link to item shipped and update status to 6 --> </p>
+                <p>Order Packed | <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a>| <a href="{% url 'Seller:itemshipped' i.id %}">Item Shipped</a><!-- link to item shipped and update status to 6 --> </p>
                 {% elif i.cstatus == 6 %}
-                <p>Order Shipped | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>| <a href="{% url 'Seller:itemdispatched' i.id %}">Item Dispatched</a><!-- link to item  Dispacatched  and update status to 7 --> </p>
+                <p>Order Shipped | <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a>| <a href="{% url 'Seller:itemdispatched' i.id %}">Item Dispatched</a><!-- link to item  Dispacatched  and update status to 7 --> </p>
                 {% elif i.cstatus == 7 %}
-                <p>Hands on Delvery Agent | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a> | <a href="{% url 'Seller:delivered' i.id %}">Item Delivered</a><!-- link to item Delivered and update status to 8 --> </p>
+                <p>Hands on Delvery Agent | <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a> | <a href="{% url 'Seller:delivered' i.id %}">Item Delivered</a><!-- link to item Delivered and update status to 8 --> </p>
                 {% elif i.cstatus == 8 %}
-                <p>Order Delivered | <a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a></p>
+                <p>Order Delivered | <a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a></p>
                 {% elif  i.cstatus == 9 %}
                 <p>Product Returned |<a href="{% url 'Seller:wviewreason' i.id %}">View Reason</a></p>
                 {% elif i.cstatus == 10 %}
-                <p>Return Verified|<a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a> </p>
+                <p>Return Verified|<a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a> </p>
                 {% else %}
-                <p>Order Cancelled |<a href="{% url 'Seller:Chat-user' i.booking.id %}">Chat Now</a>  </p>
+                <p>Order Cancelled |<a href="{% url 'Seller:Chat-user' i.id %}">Chat Now</a>  </p>
                 {% endif %}
                 </td>
             </tr>

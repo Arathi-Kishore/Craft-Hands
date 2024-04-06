@@ -48,7 +48,7 @@
 				</div>
 			</nav>
 		</div>
-		<div class="sidebar" style="background-color:rgb(16, 6, 53);">
+		<div class="sidebar" style="background-color:rgba(251, 248, 246, 0.753);">
 			<div class="scrollbar-inner sidebar-wrapper">
 				<div class="user">
 					<div class="photo">
@@ -69,80 +69,67 @@
 				</div>
 				<ul class="nav">
 					<li class="nav-item">
-						<a href="{% url 'Admin:Country' %}">
-							<i class="la la-table"></i>
-							<p>Country</p>
-
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{% url 'Admin:State' %}">
-							<i class="la la-table"></i>
-							<p>State</p>
-
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{% url 'Admin:district' %}">
+						<a href="{% url 'Admin:District' %}">
 							<i class="la la-table"></i>
 							<p>District</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:place' %}">
+						<a href="{% url 'Admin:Place' %}">
 							<i class="la la-table"></i>
 							<p>Place</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:ComplaintType' %}">
+						<a href="{% url 'Admin:Location' %}">
 							<i class="la la-table"></i>
-							<p>Complaint Type</p>
+							<p>Location</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:RentType' %}">
+						<a href="{% url 'Admin:ViewSellerList' %}">
 							<i class="la la-table"></i>
-							<p>Rent Type</p>
+							<p>ViewSellerList</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:ViewOwnerList' %}">
+						<a href="{% url 'Admin:ViewComplaints' %}">
 							<i class="la la-table"></i>
-							<p>View Owner List</p>
+							<p>View Complaints</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:AcceptedOwnerList' %}">
+						<a href="{% url 'Admin:WorkType' %}">
 							<i class="la la-table"></i>
-							<p>Accepted Owner List</p>
+							<p>Worktype</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:RejectedOwnerList' %}">
+						<a href="{% url 'Admin:AcceptedList' %}">
 							<i class="la la-table"></i>
-							<p>Rejected Owner List</p>
+							<p>Accepted List</p>
 
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{% url 'Admin:Officer' %}">
-							<i class="la la-fonticons"></i>
-							<p>Officer</p>
+						<a href="{% url 'Admin:RejectedList' %}">
+							<i class="la la-table"></i>
+							<p>Rejected List</p>
+
 						</a>
 					</li>
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a href="{% url 'Guest:index' %}">
 							<i class="la la-fonticons"></i>
 							<p>Logout</p>
 						</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
