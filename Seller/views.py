@@ -3,6 +3,7 @@ from Guest.models import *
 from Admin.models import *
 from Seller.models import *
 from datetime import datetime,timedelta
+from User.models import tbl_videopay
 from User.models import tbl_wcart,tbl_mcart
 # Create your views here.
 
@@ -371,7 +372,7 @@ def weekly_booking_report(request):    # Get the current date
     total=0
     start_of_week = current_date - timedelta(days=current_date.weekday())
     end_of_week = start_of_week + timedelta(days=6)    # Query the database for bookings within the current week   
-    data1=tbl_wcart.objects.filter(booking__date__gt=start_of_week,booking__date__lt=end_of_week,works__seller=slr)
+    data1=tbl_wcart.objects.filter(wbooking__date__gt=start_of_week,wbooking__date__lt=end_of_week,works__seller=slr)
     for i in data1:
         total=total+(int(i.qty)*int(i.works.rate))
     return render(request,"Seller/WeeklyReport.html",{'data1':data1,'total':total})
@@ -387,7 +388,7 @@ def monthly_booking_report(request):    # Get the current date
     # Query the database for bookings within the current month 
     # monthly_bookings = Booking.objects.filter(booking_date__range=[first_day_of_month, last_day_of_month])
     # Calculate the count of bookings for each day in the month
-    data1=tbl_wcart.objects.filter(booking__date__gt=first_day_of_month,booking__date__lt=last_day_of_month,works__seller=slr)
+    data1=tbl_wcart.objects.filter(wbooking__date__gt=first_day_of_month,wbooking__date__lt=last_day_of_month,works__seller=slr)
     for i in data1:
         total=total+(int(i.qty)*int(i.works.rate))
     return render(request,"Seller/MonthlyReport.html",{'data1':data1,'total':total}) 
@@ -405,7 +406,7 @@ def yearly_booking_report(request):    # Get the current date
     # yearly_bookings = Booking.objects.filter(booking_date__range=[first_day_of_year, last_day_of_year])
     # Calculate the count of bookings for each day in the year
     # daily_booking_count = yearly_bookings.annotate(date=models.functions.TruncDay('booking_date')).values('date').annotate(count=Count('id')).order_by('date')
-    data1=tbl_wcart.objects.filter(booking__date__gt=first_day_of_year,booking__date__lt=last_day_of_year,works__seller=slr)
+    data1=tbl_wcart.objects.filter(wbooking__date__gt=first_day_of_year,wbooking__date__lt=last_day_of_year,works__seller=slr)
     for i in data1:
         total=total+(int(i.qty)*int(i.works.rate))
     return render(request,"Seller/YearlyReport.html",{'data1':data1,'total':total}) 
